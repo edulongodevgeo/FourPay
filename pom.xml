@@ -7,10 +7,10 @@
 		<version>2.7.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.foursys.fourpay</groupId>
+	<groupId>br.com.foursys</groupId>
 	<artifactId>fourpay</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>FourPay</name>
+	<name>FourPayApplication</name>
 	<description>Projeto do banco da foursys para a conclusão do fourcamp</description>
 	<properties>
 		<java.version>17</java.version>
