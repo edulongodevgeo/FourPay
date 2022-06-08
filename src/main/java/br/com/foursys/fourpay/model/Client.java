@@ -18,20 +18,26 @@ public class Client {
     private Integer id;
     private String name;
     private String cpf;
+    private String password;
+    private String email;
+    private String cellphone;
     private DateTimeFormat birthDate;
+    private Double monthlyIncome;
     private ClientType clientType;
     private Address address;
 
     public Client() {
     }
 
-    public Client(Integer id, String name, String cpf, DateTimeFormat birthDate, ClientType clientType, Address address) {
-        this.id = id;
+    public Client(String name, String cpf, String password, String email, String cellphone, DateTimeFormat birthDate, ClientType clientType, Address address) {
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
-        this.clientType = clientType;
         this.address = address;
+        this.cellphone = cellphone;
+        this.email = email;
+        this.password = password;
+        this.clientType = clientType;
     }
 
     public Integer getId() {
@@ -58,12 +64,44 @@ public class Client {
         this.cpf = cpf;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
+    }
+
     public DateTimeFormat getBirthDate() {
         return birthDate;
     }
 
     public void setBirthDate(DateTimeFormat birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Double getMonthlyIncome() {
+        return monthlyIncome;
+    }
+
+    public void setMonthlyIncome(Double monthlyIncome) {
+        this.monthlyIncome = monthlyIncome;
     }
 
     public ClientType getClientType() {
