@@ -1,8 +1,9 @@
-/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Card {
@@ -11,7 +12,17 @@ public class Card {
     private String flag;
     private String password;
     private Boolean isActive;
-//    private Account account;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public Card() {
     }
@@ -64,4 +75,4 @@ public class Card {
 //        this.account = account;
 //    }
 }
-*/
+

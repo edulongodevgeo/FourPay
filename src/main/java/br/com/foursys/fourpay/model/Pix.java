@@ -1,25 +1,26 @@
 package br.com.foursys.fourpay.model;
 
 import br.com.foursys.fourpay.enums.PixKeyType;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "pix")
 public class Pix {
-    /**
-     *
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false, length = 6)
     private Integer id;
+    @Column(length = 15)
     private PixKeyType pixKeyType;
+    @Column(length = 8, nullable = false)
     private Double value;
+    @Column(length = 30)
     private LocalDateTime date;
+    @Column(length = 140)
     private String keyContent;
+    @Column
     private Boolean isActive;
     @ManyToOne
     @JoinColumn(name = "account_id")

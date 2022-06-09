@@ -5,16 +5,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Client {
-    /**
-     *
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -26,7 +20,17 @@ public class Client {
     private LocalDateTime birthDate;
     private Double monthlyIncome;
     private ClientType clientType;
-  //  private Address address;
+    @OneToOne
+    @JoinColumn(name = "address_street")
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Client() {
     }
@@ -35,7 +39,7 @@ public class Client {
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
-  //      this.address = address;
+        //      this.address = address;
         this.cellphone = cellphone;
         this.email = email;
         this.password = password;
@@ -113,12 +117,4 @@ public class Client {
     public void setClientType(ClientType clientType) {
         this.clientType = clientType;
     }
-
-//    public Address getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
 }

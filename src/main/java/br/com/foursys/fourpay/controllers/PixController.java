@@ -10,6 +10,6 @@ public class PixController {
 	
 	@GetMapping
 	public String getPix() {
-		return "String";
+		return "Teste";
 	}
 }

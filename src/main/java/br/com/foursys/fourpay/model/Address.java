@@ -6,17 +6,12 @@ import javax.persistence.Id;
 @Entity
 public class Address {
 	@Id
-    /**
-     * 
-     *
-     */
     private String street;
     private Integer number;
     private String cep;
     private String neighborhood;
     private String city;
     private String state;
-  //  private String country;
 
     public Address() {
     }
