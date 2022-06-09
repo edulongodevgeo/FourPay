@@ -1,3 +1,4 @@
+/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
@@ -46,3 +47,4 @@ public class Insurance {
         this.rules = rules;
     }
 }
+*/

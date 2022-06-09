@@ -1,3 +1,4 @@
+/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
@@ -7,9 +8,11 @@ import javax.persistence.Id;
 
 @Entity
 public class Account {
-    /**
+    */
+/**
      *
-     */
+     *//*
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -59,3 +62,4 @@ public class Account {
 //        this.client = client;
 //    }
 }
+*/
