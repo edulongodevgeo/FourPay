@@ -10,9 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table (name = "pix")
 public class Pix {
-    /**
-     *
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -93,4 +91,8 @@ public class Pix {
     public void setAccount(Account account) {
         this.account = account;
     }
+
  }
+
+}
+

@@ -1,3 +1,4 @@
+/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
@@ -24,3 +25,4 @@ public class SavingsAccount {
         this.yieldRate = yieldRate;
     }
 }
+*/
