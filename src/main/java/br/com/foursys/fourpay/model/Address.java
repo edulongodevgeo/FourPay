@@ -1,12 +1,15 @@
+/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
 
 @Entity
 public class Address {
-    /**
+    */
+/**
      *
-     */
+     *//*
+
     private String street;
     private Integer number;
     private String cep;
@@ -74,4 +77,4 @@ public class Address {
     public void setState(String state) {
         this.state = state;
     }
-}
+}*/
