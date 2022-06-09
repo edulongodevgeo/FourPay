@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 @Entity
 @Table (name = "pix")
 public class Pix {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, length = 6)
@@ -94,4 +98,8 @@ public class Pix {
     public void setAccount(Account account) {
         this.account = account;
     }
+
  }
+
+}
+

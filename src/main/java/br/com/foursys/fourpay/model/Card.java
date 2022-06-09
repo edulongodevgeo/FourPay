@@ -1,3 +1,4 @@
+/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
@@ -75,4 +76,8 @@ public class Card {
 //        this.account = account;
 //    }
 }
+<<<<<<< HEAD
 
+=======
+*/
+>>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9

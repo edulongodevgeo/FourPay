@@ -20,6 +20,7 @@ public class Client {
     private LocalDateTime birthDate;
     private Double monthlyIncome;
     private ClientType clientType;
+<<<<<<< HEAD
     @OneToOne
     @JoinColumn(name = "address_street")
     private Address address;
@@ -31,6 +32,13 @@ public class Client {
     public void setAddress(Address address) {
         this.address = address;
     }
+=======
+    private Address address;
+    private DateTimeFormat birthDate;
+    private Double monthlyIncome;
+    private ClientType clientType;
+    //private Address address;
+>>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9
 
     public Client() {
     }
@@ -39,7 +47,17 @@ public class Client {
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
+<<<<<<< HEAD
         //      this.address = address;
+=======
+        this.address = address;
+
+    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType ) {
+        this.name = name;
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+        this.address = address;
+>>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9
         this.cellphone = cellphone;
         this.email = email;
         this.password = password;
@@ -99,6 +117,13 @@ public class Client {
     }
 
     public void setBirthDate(LocalDateTime birthDate) {
+
+    public DateTimeFormat getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(DateTimeFormat birthDate) {
+
         this.birthDate = birthDate;
     }
 
@@ -117,4 +142,23 @@ public class Client {
     public void setClientType(ClientType clientType) {
         this.clientType = clientType;
     }
+<<<<<<< HEAD
+=======
+
+   public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+   public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+>>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9
 }

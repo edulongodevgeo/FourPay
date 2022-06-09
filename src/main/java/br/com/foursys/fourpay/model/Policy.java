@@ -1,3 +1,4 @@
+/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.*;
@@ -67,4 +68,8 @@ public class Policy {
         this.conditionsDescriptions = conditionsDescriptions;
     }
 }
+<<<<<<< HEAD
 
+=======
+*/
+>>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9
