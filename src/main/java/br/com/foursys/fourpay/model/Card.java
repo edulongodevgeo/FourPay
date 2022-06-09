@@ -1,4 +1,4 @@
-/*
+
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Card {
-	@Id
+    @Id
     private String numberCard;
     private String flag;
     private String password;
@@ -67,17 +67,5 @@ public class Card {
     public void setActive(Boolean active) {
         isActive = active;
     }
-
-//    public Account getAccount() {
-//        return account;
-//    }
-//
-//    public void setAccount(Account account) {
-//        this.account = account;
-//    }
 }
-<<<<<<< HEAD
 
-=======
-*/
->>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9

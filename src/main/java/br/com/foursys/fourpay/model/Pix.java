@@ -6,12 +6,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table (name = "pix")
+@Table(name = "pix")
 public class Pix {
-<<<<<<< HEAD
-=======
-
->>>>>>> 40b1ea976f42ca040910ad7fe1dac0e4930f60b9
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, length = 6)
@@ -67,11 +63,11 @@ public class Pix {
         this.value = value;
     }
 
-    public LocalDateTime  getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime  date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -99,7 +95,6 @@ public class Pix {
         this.account = account;
     }
 
- }
-
 }
+
 
