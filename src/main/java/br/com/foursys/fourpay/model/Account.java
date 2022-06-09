@@ -15,7 +15,7 @@ public class Account {
     private Integer id;
     private String number;
     private Double balance;
-    private Client client;
+//    private Client client;
 
     public Account(){
     }
@@ -24,7 +24,7 @@ public class Account {
         this.id = id;
         this.number = number;
         this.balance = balance;
-        this.client = client;
+//       this.client = client;
     }
 
     public Integer getId() {
@@ -51,11 +51,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
+//    public Client getClient() {
+//        return client;
+//    }
+//
+//    public void setClient(Client client) {
+//        this.client = client;
+//    }
 }

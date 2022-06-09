@@ -1,15 +1,16 @@
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Card {
-
+	@Id
     private String numberCard;
     private String flag;
     private String password;
     private Boolean isActive;
-    private Account account;
+//    private Account account;
 
     public Card() {
     }
@@ -19,7 +20,7 @@ public class Card {
         this.flag = flag;
         this.password = password;
         this.isActive = isActive;
-        this.account = account;
+//        this.account = account;
     }
 
     public String getNumberCard() {
@@ -54,11 +55,11 @@ public class Card {
         isActive = active;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
+//    public Account getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 }

@@ -3,6 +3,8 @@ package br.com.foursys.fourpay.model;
 import br.com.foursys.fourpay.enums.ClientType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,19 +23,19 @@ public class Client {
     private String password;
     private String email;
     private String cellphone;
-    private DateTimeFormat birthDate;
+    private LocalDateTime birthDate;
     private Double monthlyIncome;
     private ClientType clientType;
-    private Address address;
+  //  private Address address;
 
     public Client() {
     }
 
-    public Client(String name, String cpf, String password, String email, String cellphone, DateTimeFormat birthDate, ClientType clientType, Address address) {
+    public Client(String name, String cpf, String password, String email, String cellphone, LocalDateTime birthDate, ClientType clientType, Address address) {
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
-        this.address = address;
+  //      this.address = address;
         this.cellphone = cellphone;
         this.email = email;
         this.password = password;
@@ -88,11 +90,11 @@ public class Client {
         this.cellphone = cellphone;
     }
 
-    public DateTimeFormat getBirthDate() {
+    public LocalDateTime getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(DateTimeFormat birthDate) {
+    public void setBirthDate(LocalDateTime birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -112,11 +114,11 @@ public class Client {
         this.clientType = clientType;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 }
