@@ -1,4 +1,3 @@
-/*
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
@@ -24,4 +23,3 @@ public class CreditCard {
         this.limitCredit = limitCredit;
     }
 }
-*/

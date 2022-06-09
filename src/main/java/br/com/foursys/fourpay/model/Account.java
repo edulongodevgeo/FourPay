@@ -1,33 +1,35 @@
-/*
 package br.com.foursys.fourpay.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Account {
-    */
-/**
-     *
-     *//*
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String number;
     private Double balance;
-//    private Client client;
+    @OneToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-    public Account(){
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Account() {
     }
 
     public Account(Integer id, String number, Double balance, Client client) {
         this.id = id;
         this.number = number;
         this.balance = balance;
-//       this.client = client;
+        this.client = client;
     }
 
     public Integer getId() {
@@ -53,13 +55,5 @@ public class Account {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
-
-//    public Client getClient() {
-//        return client;
-//    }
-//
-//    public void setClient(Client client) {
-//        this.client = client;
-//    }
 }
-*/
+

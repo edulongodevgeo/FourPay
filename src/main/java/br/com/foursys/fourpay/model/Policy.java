@@ -1,23 +1,44 @@
-/*
 package br.com.foursys.fourpay.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Policy {
 	@Id
     private Integer policyNumber;
-//    private CreditCard creditCard;
-//    private Insurance insurance;
+
+    @OneToOne
+    @JoinColumn(name = "credit_card_limit_credit")
+    private CreditCard creditCard;
+
+    @OneToOne
+    @JoinColumn(name = "insurance_id")
+    private Insurance insurance;
     private Double valuePolicy;
     private String conditionsDescriptions;
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
+
     public Policy() {
     }
     public Policy(Integer policyNumber, CreditCard creditCard, Insurance insurance, Double valuePolicy, String conditionsDescriptions) {
         this.policyNumber = policyNumber;
-//        this.creditCard = creditCard;
-//        this.insurance = insurance;
+        this.creditCard = creditCard;
+        this.insurance = insurance;
         this.valuePolicy = valuePolicy;
         this.conditionsDescriptions = conditionsDescriptions;
     }
@@ -29,22 +50,6 @@ public class Policy {
     public void setPolicyNumber(Integer policyNumber) {
         this.policyNumber = policyNumber;
     }
-
-//    public CreditCard getCreditCard() {
-//        return creditCard;
-//    }
-//
-//    public void setCreditCard(CreditCard creditCard) {
-//        this.creditCard = creditCard;
-//    }
-//
-//    public Insurance getInsurance() {
-//        return insurance;
-//    }
-//
-//    public void setInsurance(Insurance insurance) {
-//        this.insurance = insurance;
-//    }
 
     public Double getValuePolicy() {
         return valuePolicy;
@@ -62,4 +67,3 @@ public class Policy {
         this.conditionsDescriptions = conditionsDescriptions;
     }
 }
-*/

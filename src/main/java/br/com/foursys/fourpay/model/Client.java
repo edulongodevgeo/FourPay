@@ -5,16 +5,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Client {
-    /**
-     *
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -26,22 +20,14 @@ public class Client {
     private LocalDateTime birthDate;
     private Double monthlyIncome;
     private ClientType clientType;
+    @OneToOne
+    @JoinColumn(name = "address_street")
     private Address address;
-    private DateTimeFormat birthDate;
-    private Double monthlyIncome;
-    private ClientType clientType;
-    //private Address address;
 
     public Client() {
     }
 
-    public Client(String name, String cpf, String password, String email, String cellphone, LocalDateTime birthDate, ClientType clientType, Address address) {
-        this.name = name;
-        this.cpf = cpf;
-        this.birthDate = birthDate;
-        this.address = address;
-
-    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType ) {
+    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType) {
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
@@ -104,16 +90,6 @@ public class Client {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDateTime birthDate) {
-
-    public DateTimeFormat getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(DateTimeFormat birthDate) {
-
-        this.birthDate = birthDate;
-    }
 
     public Double getMonthlyIncome() {
         return monthlyIncome;
@@ -131,19 +107,15 @@ public class Client {
         this.clientType = clientType;
     }
 
-   public Address getAddress() {
+    public void setBirthDate(LocalDateTime birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Address getAddress() {
         return address;
     }
 
     public void setAddress(Address address) {
         this.address = address;
     }
-   public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
 }
