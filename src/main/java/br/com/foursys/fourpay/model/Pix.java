@@ -1,25 +1,22 @@
-/*
 package br.com.foursys.fourpay.model;
 
 import br.com.foursys.fourpay.enums.PixKeyType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 @Entity
+@Table (name = "pix")
 public class Pix {
-    */
-/**
-     *
-     *//*
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private PixKeyType pixKeyType;
     private Double value;
-    private DateTimeFormat date;
-   //criar metodo
+    private LocalDateTime date;
     private String keyContent;
     private Boolean isActive;
     @ManyToOne
@@ -29,7 +26,7 @@ public class Pix {
     public Pix() {
     }
 
-    public Pix(Integer id, PixKeyType pixKeyType, Double value, DateTimeFormat date, String keyContent, Boolean isActive, Account account) {
+    public Pix(Integer id, PixKeyType pixKeyType, Double value, LocalDateTime date, String keyContent, Boolean isActive, Account account) {
         this.id = id;
         this.pixKeyType = pixKeyType;
         this.value = value;
@@ -63,11 +60,11 @@ public class Pix {
         this.value = value;
     }
 
-    public DateTimeFormat getDate() {
+    public LocalDateTime  getDate() {
         return date;
     }
 
-    public void setDate(DateTimeFormat date) {
+    public void setDate(LocalDateTime  date) {
         this.date = date;
     }
 
@@ -94,5 +91,8 @@ public class Pix {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+ }
+
 }
-*/
+

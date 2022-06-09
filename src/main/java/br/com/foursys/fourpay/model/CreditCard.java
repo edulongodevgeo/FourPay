@@ -2,10 +2,11 @@
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class CreditCard {
-
+	@Id
     private Double limitCredit;
 
     public CreditCard() {
