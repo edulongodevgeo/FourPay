@@ -1,9 +1,8 @@
-package br.com.foursys.fourpay.model;
+package br.com.foursys.fourpay.enums.model;
 
 import br.com.foursys.fourpay.enums.PixKeyType;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pix")

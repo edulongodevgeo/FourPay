@@ -1,7 +1,6 @@
-package br.com.foursys.fourpay.model;
+package br.com.foursys.fourpay.enums.model;
 
 import br.com.foursys.fourpay.enums.ClientType;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 

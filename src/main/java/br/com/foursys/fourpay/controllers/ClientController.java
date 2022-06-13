@@ -1,6 +1,6 @@
 package br.com.foursys.fourpay.controllers;
 
-import br.com.foursys.fourpay.model.Client;
+import br.com.foursys.fourpay.enums.model.Client;
 import br.com.foursys.fourpay.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

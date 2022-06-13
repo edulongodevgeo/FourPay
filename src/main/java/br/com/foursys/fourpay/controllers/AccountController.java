@@ -2,7 +2,7 @@ package br.com.foursys.fourpay.controllers;
 
 
 import br.com.foursys.fourpay.dto.AccountDto;
-import br.com.foursys.fourpay.model.Account;
+import br.com.foursys.fourpay.enums.model.Account;
 import br.com.foursys.fourpay.service.AccountService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
