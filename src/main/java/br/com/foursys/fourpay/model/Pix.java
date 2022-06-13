@@ -14,14 +14,10 @@ public class Pix {
     private Integer id;
     @Column(length = 15)
     private PixKeyType pixKeyType;
-    @Column(length = 8, nullable = false)
-    private Double value;
-    @Column(length = 30)
-    private LocalDateTime date;
     @Column(length = 140)
-    private String keyContent;
+    private String keyValue;
     @Column
-    private Boolean isActive;
+    private boolean isActive;
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -29,12 +25,9 @@ public class Pix {
     public Pix() {
     }
 
-    public Pix(Integer id, PixKeyType pixKeyType, Double value, LocalDateTime date, String keyContent, Boolean isActive, Account account) {
+    public Pix(Integer id, PixKeyType pixKeyType, String keyValue, boolean isActive, Account account) {
         this.id = id;
         this.pixKeyType = pixKeyType;
-        this.value = value;
-        this.date = date;
-        this.keyContent = keyContent;
         this.isActive = isActive;
         this.account = account;
     }
@@ -55,35 +48,19 @@ public class Pix {
         this.pixKeyType = pixKeyType;
     }
 
-    public Double getValue() {
-        return value;
+    public String getKeyValue() {
+        return keyValue;
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public String getKeyContent() {
-        return keyContent;
-    }
-
-    public void setKeyContent(String keyContent) {
-        this.keyContent = keyContent;
-    }
-
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public void setIsActive(Boolean active) {
         isActive = active;
     }
 
