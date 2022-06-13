@@ -4,8 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class DebitCard {
-	@Id
+public class DebitCard extends Card{
     private Double transactionLimit;
 
     public DebitCard() {
