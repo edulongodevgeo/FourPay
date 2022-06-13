@@ -1,4 +1,4 @@
-package br.com.foursys.fourpay.enums.model;
+package br.com.foursys.fourpay.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

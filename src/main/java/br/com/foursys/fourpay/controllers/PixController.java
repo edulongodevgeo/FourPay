@@ -1,7 +1,7 @@
 package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.PixDTO;
-import br.com.foursys.fourpay.enums.model.Pix;
+import br.com.foursys.fourpay.model.Pix;
 import br.com.foursys.fourpay.service.PixService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

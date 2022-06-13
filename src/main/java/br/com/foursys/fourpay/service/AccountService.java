@@ -1,6 +1,6 @@
 package br.com.foursys.fourpay.service;
 
-import br.com.foursys.fourpay.enums.model.Account;
+import br.com.foursys.fourpay.model.Account;
 import br.com.foursys.fourpay.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 

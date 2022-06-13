@@ -1,10 +1,13 @@
-package br.com.foursys.fourpay.enums.model;
+package br.com.foursys.fourpay.model;
 
 import br.com.foursys.fourpay.enums.ClientType;
-
-import java.time.LocalDateTime;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import java.time.LocalDate;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Client {
@@ -16,17 +19,18 @@ public class Client {
     private String password;
     private String email;
     private String cellphone;
-    private LocalDateTime birthDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDate birthDate;
     private Double monthlyIncome;
     private ClientType clientType;
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     @OneToOne
-    @JoinColumn(name = "address_street")
     private Address address;
 
     public Client() {
     }
 
-    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType) {
+    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType, Address address) {
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;
@@ -85,7 +89,7 @@ public class Client {
         this.cellphone = cellphone;
     }
 
-    public LocalDateTime getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -106,7 +110,7 @@ public class Client {
         this.clientType = clientType;
     }
 
-    public void setBirthDate(LocalDateTime birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

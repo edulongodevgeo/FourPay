@@ -1,4 +1,4 @@
-package br.com.foursys.fourpay.enums.model;
+package br.com.foursys.fourpay.model;
 
 //Criando Entity para ele ser uma tabela no banco de dados e criar mapeamento
 //Criando o Table que será criado na base de dados e seu nome.
