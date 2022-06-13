@@ -13,11 +13,14 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 
 // Controller aciona o service e aciona o repository
 // Crossorigin permite acessar de qualquer fonte a fonte
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/account")
 
 public class AccountController {
@@ -46,6 +49,15 @@ public class AccountController {
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts(){
         return ResponseEntity.status(HttpStatus.OK).body(accountService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id")UUID id){
+        Optional<Account> accountOptional = accountService.findById(id);
+        if (!accountOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(accountOptional.get());
     }
 
 

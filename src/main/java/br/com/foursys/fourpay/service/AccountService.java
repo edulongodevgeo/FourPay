@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 // É uma camada intermediária entre model e repository e importante para diminuir acoplamento
-// É um bin do spring como é uma campada de serviço tem algo especifico para isso @Service
+// É um bin do spring como é uma camada de serviço tem algo especifico para isso @Service
 // Dentro do service tem que criar um ponto de injeção, ele precisará acionar o Repository em casos de salvar, listar e etc
 // Transações em si controller aciona o service e o service aciona o repository
 // avisa ao spring em determinado momento para injetar
@@ -31,5 +33,9 @@ public class AccountService {
 
     public List<Account> findAll() {
         return accountRepository.findAll();
+    }
+
+    public Optional<Account> findById(UUID id) {
+        return accountRepository.findById(id);
     }
 }
