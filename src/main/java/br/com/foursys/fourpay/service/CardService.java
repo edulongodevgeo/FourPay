@@ -1,10 +1,9 @@
 package br.com.foursys.fourpay.service;
 
-import br.com.foursys.fourpay.enums.model.CreditCard;
+import br.com.foursys.fourpay.model.CreditCard;
 import br.com.foursys.fourpay.repository.CreditCardRepository;
 import br.com.foursys.fourpay.repository.DebitCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
