@@ -1,6 +1,6 @@
 package br.com.foursys.fourpay.service;
 
-import br.com.foursys.fourpay.enums.model.Pix;
+import br.com.foursys.fourpay.model.Pix;
 import br.com.foursys.fourpay.repository.PixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
