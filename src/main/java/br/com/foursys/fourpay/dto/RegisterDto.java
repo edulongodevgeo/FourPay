@@ -1,19 +1,15 @@
-package br.com.foursys.fourpay.model;
+package br.com.foursys.fourpay.dto;
 
 import br.com.foursys.fourpay.enums.ClientType;
+import br.com.foursys.fourpay.model.Address;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
-import javax.persistence.*;
+public class RegisterDto {
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-@Entity
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     private String name;
     private String cpf;
     private String password;
@@ -22,32 +18,14 @@ public class Client {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
     private Double monthlyIncome;
-    private ClientType clientType;
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    @OneToOne
-    private Address address;
+    // Partes do endereço vem abaixo
 
-    public Client() {
-    }
-
-    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType, Address address) {
-        this.name = name;
-        this.cpf = cpf;
-        this.birthDate = birthDate;
-        this.address = address;
-        this.cellphone = cellphone;
-        this.email = email;
-        this.password = password;
-        this.clientType = clientType;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String street;
+    private String number;
+    private String cep;
+    private String district;
+    private String city;
+    private String state;
 
     public String getName() {
         return name;
@@ -93,6 +71,9 @@ public class Client {
         return birthDate;
     }
 
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 
     public Double getMonthlyIncome() {
         return monthlyIncome;
@@ -102,23 +83,51 @@ public class Client {
         this.monthlyIncome = monthlyIncome;
     }
 
-    public ClientType getClientType() {
-        return clientType;
+    public String getStreet() {
+        return street;
     }
 
-    public void setClientType(ClientType clientType) {
-        this.clientType = clientType;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public String getNumber() {
+        return number;
     }
 
-    public Address getAddress() {
-        return address;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
