@@ -22,7 +22,15 @@ public class Address implements Serializable {
 	private String state;
 	
 	public Address() {
-		
+	}
+
+	public Address(String street, String number, String cep, String district, String city, String state) {
+		this.street = street;
+		this.number = number;
+		this.cep = cep;
+		this.district = district;
+		this.city = city;
+		this.state = state;
 	}
 
 	public Integer getId() {
