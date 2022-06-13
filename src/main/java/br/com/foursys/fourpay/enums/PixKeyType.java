@@ -3,8 +3,8 @@ package br.com.foursys.fourpay.enums;
 public enum PixKeyType {
     CPF(0),
     EMAIL(1),
-    TELEFONE(2),
-    ALEATORIO(3);
+    CELLPHONE(2),
+    RANDOM(3);
 
     private Integer id;
     PixKeyType(int id) {
