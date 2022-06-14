@@ -8,6 +8,8 @@ public class AddressDTO {
 	private String city;
 	private String state;
 
+	private String complement;
+
 	public String getStreet() {
 		return street;
 	}
@@ -54,5 +56,12 @@ public class AddressDTO {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
 	}
 }
