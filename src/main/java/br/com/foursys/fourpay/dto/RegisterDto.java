@@ -1,11 +1,7 @@
 package br.com.foursys.fourpay.dto;
 
-import br.com.foursys.fourpay.enums.ClientType;
-import br.com.foursys.fourpay.model.Address;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 public class RegisterDto {
