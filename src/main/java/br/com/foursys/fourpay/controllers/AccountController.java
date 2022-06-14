@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 
 // Controller aciona o service e aciona o repository
@@ -43,7 +42,7 @@ public class AccountController {
     public ResponseEntity<Object> saveAccount(@RequestBody @Valid AccountDto accountDto){
         var account = new Account();
         BeanUtils.copyProperties(accountDto, account);
-        account.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(accountService.save(account));
     }
     @GetMapping
@@ -52,7 +51,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id")UUID id){
+    public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id")Integer id){
         Optional<Account> accountOptional = accountService.findById(id);
         if (!accountOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found.");

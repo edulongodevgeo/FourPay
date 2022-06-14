@@ -1,6 +1,7 @@
 package br.com.foursys.fourpay.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 // Dto's dados de entrada é um padrão de projeto de software usado para transferir dados entre subsistemas de um software.
@@ -16,7 +17,7 @@ public class AccountDto {
     private String number;
     @NotBlank
     private String agency;
-    //@NotBlank
+    @NotNull
     private Double balance;
 
     public String getNumber() {
