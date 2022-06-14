@@ -12,13 +12,11 @@ import java.util.UUID;
 @Table(name = "account")
 public class Account {
 
-    private static final long serialVersionUID = 1L;
 
-    //UUID por que porque quando trabalha com Arquiteturas de microservices onde tem sincronia de dados
-    //São ids unicos que podem ser em qualquer lugar e universais e não corre o risco de conflitos
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Integer id;
     @Column(nullable = false, unique = true)
     private String number;
     @Column(nullable = false, unique = false, updatable = true)
@@ -28,11 +26,11 @@ public class Account {
     @Column(nullable = false)
     private LocalDateTime registrationDate;
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
