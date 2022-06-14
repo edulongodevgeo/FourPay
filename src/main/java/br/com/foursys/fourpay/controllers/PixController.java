@@ -19,7 +19,7 @@ public class PixController {
 	@Autowired
 	PixService pixService;
 	@Autowired
-	AccountService accountService;
+	AccountService 	accountService;
 	
 	@GetMapping
 	public ResponseEntity<List<Pix>> getPix() {
