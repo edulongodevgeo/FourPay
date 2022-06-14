@@ -20,6 +20,16 @@ public class AccountDto {
     @NotNull
     private Double balance;
 
+    private Integer clientId;
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
+    }
+
     public String getNumber() {
         return number;
     }
