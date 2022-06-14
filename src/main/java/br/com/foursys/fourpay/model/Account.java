@@ -21,7 +21,7 @@ public class Account {
     private UUID id;
     @Column(nullable = false, unique = true)
     private String number;
-    @Column(nullable = false, unique = true, updatable = true)
+    @Column(nullable = false, unique = false, updatable = true)
     private String agency;
     @Column(nullable = false, updatable = true)
     private Double balance;
