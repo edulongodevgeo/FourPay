@@ -5,6 +5,7 @@ import br.com.foursys.fourpay.dto.AccountDto;
 import br.com.foursys.fourpay.model.Account;
 import br.com.foursys.fourpay.service.AccountService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 
 // Controller aciona o service e aciona o repository
@@ -30,7 +30,8 @@ public class AccountController {
 
         this.accountService = accountService;
     }
-
+    @Autowired
+    ClientController clientController;
     // Não definimos uri pois ja foi setado a nivel de classe /account
     // ReponseEntity e para montar resposta com status e corpo e colocou object por causa dos diferentes tipos de retorno
     // Recebemos o dto para  salvar todos os campos que cliente envia e seja salvo
@@ -43,8 +44,10 @@ public class AccountController {
     public ResponseEntity<Object> saveAccount(@RequestBody @Valid AccountDto accountDto){
         var account = new Account();
         BeanUtils.copyProperties(accountDto, account);
-        account.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
+        account.setClient(clientController.getById(accountDto.getClientId()).get());
         return ResponseEntity.status(HttpStatus.CREATED).body(accountService.save(account));
+
     }
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts(){
@@ -52,7 +55,10 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
+
+    public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id")Integer id){
     public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id") Integer id){
+
         Optional<Account> accountOptional = accountService.findById(id);
         if (!accountOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found.");

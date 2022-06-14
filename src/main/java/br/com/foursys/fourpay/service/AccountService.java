@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 // É uma camada intermediária entre model e repository e importante para diminuir acoplamento
 // É um bin do spring como é uma camada de serviço tem algo especifico para isso @Service

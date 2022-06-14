@@ -6,13 +6,10 @@ package br.com.foursys.fourpay.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "account")
 public class Account {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,8 +20,19 @@ public class Account {
     private String agency;
     @Column(nullable = false, updatable = true)
     private Double balance;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
     @Column(nullable = false)
-    private LocalDateTime registrationDate;
+    private LocalDateTime registrationDateAccount;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public Integer getId() {
         return id;
@@ -58,11 +66,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
+    public LocalDateTime getRegistrationDateAccount() {
+        return registrationDateAccount;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setRegistrationDateAccount(LocalDateTime registrationDateAccount) {
+        this.registrationDateAccount = registrationDateAccount;
     }
 }
