@@ -1,11 +1,9 @@
 package br.com.foursys.fourpay.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+//@SequenceGenerator(allocationSize = 1, sequenceName = "sq_insurence", name = "Insurnace")
 public class Insurance {
 
     @Id
@@ -13,11 +11,11 @@ public class Insurance {
     private Integer id;
     private String name;
     private String rules;
+
     public Insurance() {
     }
 
-    public Insurance(Integer id, String name, String rules) {
-        this.id = id;
+    public Insurance(String name, String rules) {
         this.name = name;
         this.rules = rules;
     }

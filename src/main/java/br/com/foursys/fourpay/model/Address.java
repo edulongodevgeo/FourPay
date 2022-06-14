@@ -20,17 +20,20 @@ public class Address implements Serializable {
 	private String district;
 	private String city;
 	private String state;
+
+	private String complement;
 	
 	public Address() {
 	}
 
-	public Address(String street, String number, String cep, String district, String city, String state) {
+	public Address(String street, String number, String cep, String district, String city, String state, String complement) {
 		this.street = street;
 		this.number = number;
 		this.cep = cep;
 		this.district = district;
 		this.city = city;
 		this.state = state;
+		this.complement = complement;
 	}
 
 	public Integer getId() {
@@ -87,5 +90,13 @@ public class Address implements Serializable {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
 	}
 }
