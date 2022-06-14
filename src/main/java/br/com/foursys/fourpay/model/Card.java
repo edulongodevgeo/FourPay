@@ -1,15 +1,14 @@
 
 package br.com.foursys.fourpay.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Card {
     @Id
-    private String numberCard;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String cardNumber;
     private String flag;
     private String password;
     private Boolean isActive;
@@ -28,20 +27,20 @@ public class Card {
     public Card() {
     }
 
-    public Card(String numberCard, String flag, String password, Boolean isActive, Account account) {
-        this.numberCard = numberCard;
+    public Card(String cardNumber, String flag, String password, Boolean isActive, Account account) {
+        this.cardNumber = cardNumber;
         this.flag = flag;
         this.password = password;
         this.isActive = isActive;
 //        this.account = account;
     }
 
-    public String getNumberCard() {
-        return numberCard;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setNumberCard(String numberCard) {
-        this.numberCard = numberCard;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public String getFlag() {
@@ -60,11 +59,11 @@ public class Card {
         this.password = password;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public void setIsActive(Boolean active) {
         isActive = active;
     }
 }
