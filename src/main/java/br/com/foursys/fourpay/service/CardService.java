@@ -22,7 +22,7 @@ public class CardService {
         return creditCardRepository.findAll();
     }
 
-    public Object getCreditCardByiD(UUID accountId) {
+    public Object getCreditCardByiD(Integer accountId) {
         List<CreditCard> creditCardList = findAllCreditCard();
         for (CreditCard item : creditCardList) {
             if (item.getAccount().getId().equals(accountId)) {
@@ -42,7 +42,7 @@ public class CardService {
         return debitCardRepository.findAll();
     }
 
-    public Object getDebitCardByiD(UUID accountId) {
+    public Object getDebitCardByiD(Integer accountId) {
         List<DebitCard> debitCardList = findAllDebitCard();
         for (DebitCard item : debitCardList) {
             if (item.getAccount().getId().equals(accountId)) {
