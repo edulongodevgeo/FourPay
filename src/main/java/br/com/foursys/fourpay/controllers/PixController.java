@@ -2,6 +2,7 @@ package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.PixDTO;
 import br.com.foursys.fourpay.model.Pix;
+import br.com.foursys.fourpay.service.AccountService;
 import br.com.foursys.fourpay.service.PixService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class PixController {
 	@Autowired
 	PixService pixService;
 	@Autowired
-	AccountController accountController;
+	AccountService accountService;
 	
 	@GetMapping
 	public ResponseEntity<List<Pix>> getPix() {
@@ -35,7 +36,7 @@ public class PixController {
 		Pix pix = new Pix();
 		BeanUtils.copyProperties(pixDTO, pix);
 		pix.setIsActive(true);
-		//pix.setAccount(accountController.getAccountById(pixDTO.getAccountId()));
+		pix.setAccount(accountService.findById(pixDTO.getAccountId()).get());
 		return ResponseEntity.status(HttpStatus.CREATED).body(pixService.save(pix));
 	}
 

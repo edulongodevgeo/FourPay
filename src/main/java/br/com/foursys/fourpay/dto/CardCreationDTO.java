@@ -1,10 +1,9 @@
 package br.com.foursys.fourpay.dto;
 
-import java.util.UUID;
 
 public class CardCreationDTO {
     private String password;
-    private UUID accountId;
+    private Integer accountId;
 
     public String getPassword() {
         return password;
@@ -14,11 +13,11 @@ public class CardCreationDTO {
         this.password = password;
     }
 
-    public UUID getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(UUID accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 }

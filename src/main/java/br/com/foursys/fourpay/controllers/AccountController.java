@@ -52,7 +52,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id")UUID id){
+    public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id") Integer id){
         Optional<Account> accountOptional = accountService.findById(id);
         if (!accountOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found.");

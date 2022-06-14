@@ -35,7 +35,7 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    public Optional<Account> findById(UUID id) {
+    public Optional<Account> findById(Integer id) {
         return accountRepository.findById(id);
     }
 }
