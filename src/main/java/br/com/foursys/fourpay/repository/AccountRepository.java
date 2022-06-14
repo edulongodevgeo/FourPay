@@ -12,5 +12,5 @@ import java.util.UUID;
 //Porém por questão de aprendizado vamos colocar o @repository para transações em base de dados
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, UUID> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
 }
