@@ -5,6 +5,7 @@ import br.com.foursys.fourpay.dto.AccountDto;
 import br.com.foursys.fourpay.model.Account;
 import br.com.foursys.fourpay.service.AccountService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,8 @@ public class AccountController {
 
         this.accountService = accountService;
     }
-
+    @Autowired
+    ClientController clientController;
     // Não definimos uri pois ja foi setado a nivel de classe /account
     // ReponseEntity e para montar resposta com status e corpo e colocou object por causa dos diferentes tipos de retorno
     // Recebemos o dto para  salvar todos os campos que cliente envia e seja salvo
@@ -43,7 +45,9 @@ public class AccountController {
         var account = new Account();
         BeanUtils.copyProperties(accountDto, account);
         account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
+        account.setClient(clientController.getById(accountDto.getClientId()).get());
         return ResponseEntity.status(HttpStatus.CREATED).body(accountService.save(account));
+
     }
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts(){
