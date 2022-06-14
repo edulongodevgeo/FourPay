@@ -95,7 +95,6 @@ public class Address implements Serializable {
 	public String getComplement() {
 		return complement;
 	}
-
 	public void setComplement(String complement) {
 		this.complement = complement;
 	}
