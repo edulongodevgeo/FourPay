@@ -14,36 +14,28 @@ public class AccountDto {
 
     @NotBlank
     @Size(max = 20)
-    private String number;
+    private String accountNumber;
     @NotBlank
-    private String agency;
+    private String agencyNumber;
     @NotNull
     private Double balance;
 
     private Integer clientId;
 
-    public Integer getClientId() {
-        return clientId;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public String getNumber() {
-        return number;
+    public String getAgencyNumber() {
+        return agencyNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getAgency() {
-        return agency;
-    }
-
-    public void setAgency(String agency) {
-        this.agency = agency;
+    public void setAgencyNumber(String agencyNumber) {
+        this.agencyNumber = agencyNumber;
     }
 
     public Double getBalance() {
@@ -52,5 +44,13 @@ public class AccountDto {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 }

@@ -15,9 +15,9 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(nullable = false, unique = true)
-    private String number;
+    private String accountNumber;
     @Column(nullable = false, unique = false, updatable = true)
-    private String agency;
+    private String agencyNumber;
     @Column(nullable = false, updatable = true)
     private Double balance;
     @ManyToOne
@@ -25,14 +25,6 @@ public class Account {
     private Client client;
     @Column(nullable = false)
     private LocalDateTime registrationDateAccount;
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
 
     public Integer getId() {
         return id;
@@ -42,20 +34,20 @@ public class Account {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public String getAgency() {
-        return agency;
+    public String getAgencyNumber() {
+        return agencyNumber;
     }
 
-    public void setAgency(String agency) {
-        this.agency = agency;
+    public void setAgencyNumber(String agencyNumber) {
+        this.agencyNumber = agencyNumber;
     }
 
     public Double getBalance() {
@@ -64,6 +56,14 @@ public class Account {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public LocalDateTime getRegistrationDateAccount() {

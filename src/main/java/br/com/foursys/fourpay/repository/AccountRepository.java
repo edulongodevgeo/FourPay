@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 //Porém por questão de aprendizado vamos colocar o @repository para transações em base de dados
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Integer> {
+public interface AccountRepository extends JpaRepository<Account,Integer> {
 }
