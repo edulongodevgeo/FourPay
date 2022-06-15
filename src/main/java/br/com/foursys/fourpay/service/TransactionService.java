@@ -1,7 +1,11 @@
 package br.com.foursys.fourpay.service;
 
+import br.com.foursys.fourpay.dto.PaymentWithCreditDTO;
+import br.com.foursys.fourpay.dto.PaymentWithDebitDTO;
 import br.com.foursys.fourpay.enums.TransactionType;
 import br.com.foursys.fourpay.model.Account;
+import br.com.foursys.fourpay.model.CreditCard;
+import br.com.foursys.fourpay.model.DebitCard;
 import br.com.foursys.fourpay.model.Transaction;
 import br.com.foursys.fourpay.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,4 +88,25 @@ public class TransactionService {
     }
 
 
+    public void saveCreditPayment(CreditCard creditCard, PaymentWithCreditDTO paymentWithCreditDTO) {
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(TransactionType.CREDIT);
+        transaction.setDateOfTransaction(LocalDateTime.now());
+        transaction.setValue(paymentWithCreditDTO.getValue());
+        transaction.setPayerId(creditCard.getAccount().getId());
+        transaction.setReceiverId(null);
+        transaction.setDescription(paymentWithCreditDTO.getDescription());
+        transactionRepository.save(transaction);
+    }
+
+    public void saveDebitPayment(DebitCard debitCard, PaymentWithDebitDTO paymentWithDebitDTO) {
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(TransactionType.DEBIT);
+        transaction.setDateOfTransaction(LocalDateTime.now());
+        transaction.setValue(paymentWithDebitDTO.getValue());
+        transaction.setPayerId(debitCard.getAccount().getId());
+        transaction.setReceiverId(null);
+        transaction.setDescription(paymentWithDebitDTO.getDescription());
+        transactionRepository.save(transaction);
+    }
 }

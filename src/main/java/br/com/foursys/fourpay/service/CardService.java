@@ -73,4 +73,7 @@ public class CardService {
         return debitCardRepository.save(debitCard);
     }
 
+    public Optional<DebitCard> findDebitById(Integer debitCardId) {
+        return debitCardRepository.findById(debitCardId);
+    }
 }

@@ -60,4 +60,14 @@ public class AccountService {
         savingsAccount.setYieldRate(5.00);
         return savingsAccountRepository.save(savingsAccount);
     }
+
+    public boolean updateBalance(Account account, Double value) {
+        if (account.getBalance() >= value) {
+            account.setBalance(account.getBalance() - value);
+            accountRepository.save(account);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

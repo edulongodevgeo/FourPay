@@ -2,6 +2,7 @@ package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.CardCreationDTO;
 import br.com.foursys.fourpay.dto.CardUpdateDTO;
+import br.com.foursys.fourpay.dto.DebitLimitUpdateDTO;
 import br.com.foursys.fourpay.enums.ClientType;
 import br.com.foursys.fourpay.model.Client;
 import br.com.foursys.fourpay.model.CreditCard;
@@ -76,6 +77,13 @@ public class CardController {
         if(cardUpdateDTO.getActive() != null) {
             debitCard.setIsActive(cardUpdateDTO.getActive());
         }
+        return ResponseEntity.status(HttpStatus.OK).body(cardService.saveDebitCard(debitCard));
+    }
+
+    @PutMapping("/{accountId}/debit/update-limit")
+    public ResponseEntity<Object> putUpdateDebitCardLimit(@PathVariable Integer accountId, @RequestBody DebitLimitUpdateDTO debitLimitUpdateDTO) {
+        DebitCard debitCard = (DebitCard) cardService.getDebitCardByiD(accountId);
+        debitCard.setTransactionLimit(debitLimitUpdateDTO.getTransactionLimit());
         return ResponseEntity.status(HttpStatus.OK).body(cardService.saveDebitCard(debitCard));
     }
 
