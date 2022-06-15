@@ -27,24 +27,28 @@ public class TransactionService {
             accountService.save(account);
             return account;
         }else {
-            throw new IllegalArgumentException("Saldo insuficiente");
-        }
+        	return null;        }
       }
 
-    public void transferValue(Account account, Double transferValue){
-        if (account.getBalance() >= transferValue) {
-            account.setBalance(account.getBalance() - transferValue);
+    public Object transferValue(Integer payerId, Integer receiverId, Double transferValue){
+        Account accountPayer = accountService.findById(payerId).get();
+        Account accountReceiver = accountService.findById(receiverId).get();
+    	if (accountPayer.getBalance() >= transferValue) {
+    	        accountPayer.setBalance(accountPayer.getBalance() - transferValue);
+    	        accountService.save(accountPayer);
+    	        accountReceiver.setBalance(accountReceiver.getBalance() + transferValue);
+    	        accountService.save(accountReceiver);
+    	        return accountPayer;
         } else {
-            throw new IllegalArgumentException("Saldo insuficiente");
+            return null;
         }
+		
     }
 
     public void transferPixValue(Account account, Double transferValue){
        if (account.getBalance() >= transferValue) {
            account.setBalance(account.getBalance() - transferValue);
-       } else {
-            throw new IllegalArgumentException("Saldo insuficiente");
-       }
+    }
     }
 
     public boolean validantionBalance(Account account, Double value){
@@ -54,8 +58,8 @@ public class TransactionService {
         return false;
     }
 
-
     public TransactionService updateBalance(Account account) {
         return updateBalance(account);
     }
+    
 }

@@ -1,6 +1,7 @@
 package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.DepositDto;
+import br.com.foursys.fourpay.dto.TransferDTO;
 import br.com.foursys.fourpay.dto.WithdrawDto;
 import br.com.foursys.fourpay.model.Account;
 import br.com.foursys.fourpay.service.TransactionService;
@@ -21,10 +22,9 @@ public class TransactionController {
     public Object withdrawValue(@RequestBody WithdrawDto withdrawDto){
         return transactionService.withdrawValue(withdrawDto.getAccountId(), withdrawDto.getWithdrawValue());
     }
-    @PutMapping("/transfer")
-    public TransactionService transferValue(@RequestBody Account account, @PathVariable Double transferValue){
-        transactionService.transferValue(account, transferValue);
-        return transactionService.updateBalance(account);
+    @PostMapping("/transfer")
+    public Object transferValue(@RequestBody TransferDTO transferDTO){
+        return transactionService.transferValue(transferDTO.getPayerId(), transferDTO.getReceiverId(), transferDTO.getTransferValue());
     }
 
 }
