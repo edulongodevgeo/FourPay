@@ -66,6 +66,18 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.OK).body(accountOptional.get());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateAccount(@PathVariable(value = "id")Integer id, @RequestBody @Valid AccountDto accountDto){
+
+        Optional<Account> accountOptional = accountService.findById(id);
+        if(!accountOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found.");
+        }
+        var account = accountOptional.get();
+        account.setBalance(accountDto.getBalance());
+        return ResponseEntity.status(HttpStatus.OK).body(accountService.save(account));
+    }
+
 
 
 }
