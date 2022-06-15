@@ -2,8 +2,10 @@ package br.com.foursys.fourpay.service;
 
 import br.com.foursys.fourpay.model.Account;
 import br.com.foursys.fourpay.model.CheckingsAccount;
+import br.com.foursys.fourpay.model.SavingsAccount;
 import br.com.foursys.fourpay.repository.AccountRepository;
 import br.com.foursys.fourpay.repository.CheckingsAccountRepository;
+import br.com.foursys.fourpay.repository.SavingsAccountRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ import java.util.Optional;
 public class AccountService {
     @Autowired
     CheckingsAccountRepository checkingsAccountRepository;
+    @Autowired
+    SavingsAccountRepository savingsAccountRepository;
     final AccountRepository accountRepository;
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -50,5 +54,10 @@ public class AccountService {
         BeanUtils.copyProperties(account, checkingsAccount);
         checkingsAccount.setMaintenanceRate(30.00);
         checkingsAccountRepository.save(checkingsAccount);
+    }
+
+    public Object createSavingsAccount(SavingsAccount savingsAccount) {
+        savingsAccount.setYieldRate(5.00);
+        return savingsAccountRepository.save(savingsAccount);
     }
 }

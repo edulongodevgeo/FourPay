@@ -2,8 +2,10 @@ package br.com.foursys.fourpay.controllers;
 
 
 import br.com.foursys.fourpay.dto.AccountDto;
+import br.com.foursys.fourpay.dto.SavingsAccountDTO;
 import br.com.foursys.fourpay.model.Account;
 import br.com.foursys.fourpay.model.Client;
+import br.com.foursys.fourpay.model.SavingsAccount;
 import br.com.foursys.fourpay.service.AccountService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,16 @@ public class AccountController {
         accountService.createCheckingsAccount(account);
     }
 
+    @PostMapping("/savings")
+    public ResponseEntity<Object> saveSavingsAccount(@RequestBody @Valid SavingsAccountDTO SavingsAccountDto) {
+        var savingsAccount = new SavingsAccount();
+        BeanUtils.copyProperties(SavingsAccountDto, savingsAccount);
+        savingsAccount.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
+        savingsAccount.setClient(clientController.getById(SavingsAccountDto.getClientId()).get());
+        savingsAccount.setAgency(determineAgency());
+        savingsAccount.setNumber(determineNumber(accountService.findAll().size()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createSavingsAccount(savingsAccount));
+    }
     private String determineNumber(Integer size) {
         size = size + 1;
         return "10000" + size.toString();
@@ -97,7 +109,6 @@ public class AccountController {
 
     private String determineAgency() {
         return "001";
-
     }
 }
 
