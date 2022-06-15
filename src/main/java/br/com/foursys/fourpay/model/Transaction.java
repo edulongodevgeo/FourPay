@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 @Entity
-public class TransactionModel {
+public class Transaction {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer transactionId;
@@ -16,17 +16,7 @@ public class TransactionModel {
     private TransactionType transactionType;
     private Integer receiverId;
     private Integer payerId;
-    private Double balance;
 
-       public TransactionModel(Integer transactionId, Double value, LocalDateTime dateOfTransaction, TransactionType transactionType, Integer receiverId, Integer payerId, Double balance) {
-        this.transactionId = transactionId;
-        this.value = value;
-        this.dateOfTransaction = dateOfTransaction;
-        this.transactionType = transactionType;
-        this.receiverId = receiverId;
-        this.payerId = transactionId;
-        this.balance = balance;
-    }
 
     public Integer getTransactionId() {
         return transactionId;
@@ -76,11 +66,4 @@ public class TransactionModel {
 		this.payerId = payerId;
 	}
 
-	public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
 }
