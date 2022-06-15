@@ -6,11 +6,11 @@ import br.com.foursys.fourpay.model.SavingsAccount;
 import br.com.foursys.fourpay.repository.AccountRepository;
 import br.com.foursys.fourpay.repository.CheckingsAccountRepository;
 import br.com.foursys.fourpay.repository.SavingsAccountRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +32,7 @@ public class AccountService {
     @Autowired
     SavingsAccountRepository savingsAccountRepository;
     final AccountRepository accountRepository;
+
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
@@ -49,15 +50,11 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    public void createCheckingsAccount(Account account) {
-        CheckingsAccount checkingsAccount = new CheckingsAccount();
-        BeanUtils.copyProperties(account, checkingsAccount);
-        checkingsAccount.setMaintenanceRate(30.00);
-        checkingsAccountRepository.save(checkingsAccount);
+    public void createCheckingsAccount(CheckingsAccount account) {
+        checkingsAccountRepository.save(account);
     }
 
     public Object createSavingsAccount(SavingsAccount savingsAccount) {
-        savingsAccount.setYieldRate(5.00);
         return savingsAccountRepository.save(savingsAccount);
     }
 
@@ -69,5 +66,29 @@ public class AccountService {
         } else {
             return false;
         }
+    }
+
+    public List<CheckingsAccount> updateAllCreditAccountsByAnniversary() {
+        List<CheckingsAccount> checkingsAccounts = checkingsAccountRepository.findAll();
+        for (CheckingsAccount account : checkingsAccounts) {
+            if (account.getAccountAniversary().equals(LocalDateTime.now().minusDays(30))) {
+                account.setBalance(account.getBalance() - account.getMaintenanceRate());
+                account.setAccountAniversary(LocalDateTime.now());
+                checkingsAccountRepository.save(account);
+            }
+        }
+        return checkingsAccounts;
+    }
+
+    public List<SavingsAccount> updateAllSavingsAccountsByAnniversary() {
+        List<SavingsAccount> savingsAccounts = savingsAccountRepository.findAll();
+        for (SavingsAccount account : savingsAccounts) {
+            if (account.getAccountAniversary().equals(LocalDateTime.now().minusDays(30))) {
+                account.setBalance(account.getBalance() + (account.getBalance() * account.getYieldRate()));
+                account.setAccountAniversary(LocalDateTime.now());
+                savingsAccountRepository.save(account);
+            }
+        }
+        return savingsAccounts;
     }
 }
