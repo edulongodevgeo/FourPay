@@ -4,8 +4,11 @@ package br.com.foursys.fourpay.controllers;
 import br.com.foursys.fourpay.dto.PolicyDTO;
 import br.com.foursys.fourpay.model.CreditCard;
 import br.com.foursys.fourpay.model.Policy;
+import br.com.foursys.fourpay.service.CardService;
+import br.com.foursys.fourpay.service.InsuranceService;
 import br.com.foursys.fourpay.service.PolicyService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +28,12 @@ public class PolicyController {
         this.policyService = policyService;
     }
 
+    @Autowired
+    CardService cardService;
+
+    @Autowired
+    InsuranceService insuranceService;
+
     @GetMapping
     public ResponseEntity<List<Policy>> getAllPolicy(){
         return ResponseEntity.status(HttpStatus.OK).body(policyService.findAll());
@@ -42,9 +51,11 @@ public class PolicyController {
     @PostMapping
     public ResponseEntity<Object> savePolicy(@RequestBody @Valid PolicyDTO policyDTO){
         var policy = new Policy();
-        BeanUtils.copyProperties(policyDTO, policy);
         policy.setConditionsDescriptions("Condições exemplo");
-//        policy.setCreditCard(CreditCard creditCard);
+        policy.setValuePolicy(200.0);
+        policy.setId(UUID.randomUUID());
+        policy.setInsurance(insuranceService.getInsuranceId(policyDTO.getInsurance()).get());
+        policy.setCreditCard(cardService.findCreditById(policyDTO.getCreditCard()).get());
         return ResponseEntity.status(HttpStatus.CREATED).body(policyService.save(policy));
     }
     @DeleteMapping("/{id}")
