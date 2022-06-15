@@ -4,10 +4,8 @@ import br.com.foursys.fourpay.dto.CardCreationDTO;
 import br.com.foursys.fourpay.dto.CardUpdateDTO;
 import br.com.foursys.fourpay.model.CreditCard;
 import br.com.foursys.fourpay.model.DebitCard;
-import br.com.foursys.fourpay.repository.CreditCardRepository;
 import br.com.foursys.fourpay.service.AccountService;
 import br.com.foursys.fourpay.service.CardService;
-import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,15 +23,15 @@ public class CardController {
     AccountService accountService;
 
     @GetMapping("/{accountId}/credit")
-    public ResponseEntity<Object> getCreditCardById(@PathVariable UUID accountId) {
+    public ResponseEntity<Object> getCreditCardById(@PathVariable Integer accountId) {
         return ResponseEntity.status(HttpStatus.OK).body(cardService.getCreditCardByiD(accountId));
     }
 
     @PostMapping("/{accountId}/credit")
-    public ResponseEntity<Object> postCreateNewCreditCard(@PathVariable UUID accountId, @RequestBody CardCreationDTO cardCreationDTO) {
+    public ResponseEntity<Object> postCreateNewCreditCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
         CreditCard creditCard = new CreditCard();
         BeanUtils.copyProperties(cardCreationDTO, creditCard);
-        // creditCard.setAccount(accountService.getAccountById(accountId));
+       //creditCard.setAccount(accountService.getAccountById(accountId));
         creditCard.setFlag("MASTERCARD");
         creditCard.setCardNumber(generateCardNumber());
         creditCard.setLimitCredit(determineLimit(creditCard.getAccount().getBalance()));
@@ -42,7 +40,7 @@ public class CardController {
     }
 
     @PutMapping("/{accountId}/credit")
-    public ResponseEntity<Object> putUpdateCreditCard(@PathVariable UUID accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
+    public ResponseEntity<Object> putUpdateCreditCard(@PathVariable Integer accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
         CreditCard creditCard = (CreditCard) cardService.getCreditCardByiD(accountId);
         if(cardUpdateDTO.getPassword() != null) {
             creditCard.setPassword(cardUpdateDTO.getPassword());
@@ -54,11 +52,11 @@ public class CardController {
     }
 
     @GetMapping("/{accountId}/debit")
-    public ResponseEntity<Object> getDebitCardById(@PathVariable UUID accountId) {
+    public ResponseEntity<Object> getDebitCardById(@PathVariable Integer accountId) {
         return ResponseEntity.status(HttpStatus.OK).body(cardService.getDebitCardByiD(accountId));
     }
     @PostMapping("/{accountId}/debit")
-    public ResponseEntity<Object> postCreateNewDebitCard(@PathVariable UUID accountId, @RequestBody CardCreationDTO cardCreationDTO) {
+    public ResponseEntity<Object> postCreateNewDebitCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
         DebitCard debitCard = new DebitCard();
         BeanUtils.copyProperties(cardCreationDTO, debitCard);
         // creditCard.setAccount(accountService.getAccountById(accountId));
@@ -70,7 +68,7 @@ public class CardController {
     }
 
     @PutMapping("/{accountId}/debit")
-    public ResponseEntity<Object> putUpdateDebitCard(@PathVariable UUID accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
+    public ResponseEntity<Object> putUpdateDebitCard(@PathVariable Integer accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
         DebitCard debitCard = (DebitCard) cardService.getDebitCardByiD(accountId);
         if(cardUpdateDTO.getPassword() != null) {
             debitCard.setPassword(cardUpdateDTO.getPassword());
@@ -92,7 +90,6 @@ public class CardController {
     }
 
     private String generateCardNumber() {
-        // generate a credit card number with 16 digits with the first digit 4
         String cardNumber = "";
         for (int i = 0; i < 16; i++) {
             if (i == 0) {

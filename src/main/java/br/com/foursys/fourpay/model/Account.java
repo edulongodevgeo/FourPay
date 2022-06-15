@@ -6,33 +6,39 @@ package br.com.foursys.fourpay.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "account")
 public class Account {
 
-    private static final long serialVersionUID = 1L;
-
-    //UUID por que porque quando trabalha com Arquiteturas de microservices onde tem sincronia de dados
-    //São ids unicos que podem ser em qualquer lugar e universais e não corre o risco de conflitos
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Integer id;
     @Column(nullable = false, unique = true)
     private String number;
     @Column(nullable = false, unique = false, updatable = true)
     private String agency;
     @Column(nullable = false, updatable = true)
     private Double balance;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
     @Column(nullable = false)
-    private LocalDateTime registrationDate;
+    private LocalDateTime registrationDateAccount;
 
-    public UUID getId() {
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,11 +66,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
+    public LocalDateTime getRegistrationDateAccount() {
+        return registrationDateAccount;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setRegistrationDateAccount(LocalDateTime registrationDateAccount) {
+        this.registrationDateAccount = registrationDateAccount;
     }
 }

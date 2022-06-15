@@ -32,7 +32,7 @@ public class Card {
         this.flag = flag;
         this.password = password;
         this.isActive = isActive;
-//        this.account = account;
+        this.account = account;
     }
 
     public String getCardNumber() {
