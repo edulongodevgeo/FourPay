@@ -20,17 +20,20 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping
-    public List<Client> getAll(){
+    public List<Client> getAll() {
         return clientService.getAllClient();
     }
+
     @GetMapping("/{id}")
-    public Optional<Client> getById(@PathVariable Integer id){
+    public Optional<Client> getById(@PathVariable Integer id) {
         return clientService.getClientId(id);
     }
+
     @Autowired
     AddressController addressController;
+
     @PostMapping
-    public Client addClient(@RequestBody RegisterDto registerDto){
+    public Client addClient(@RequestBody RegisterDto registerDto) {
 
         Client client = new Client();
         Address adress = new Address();
@@ -41,13 +44,23 @@ public class ClientController {
         addressController.saveAddressFromClientCreation(adress);
         return clientService.addClient(client);
     }
+
     @DeleteMapping("/{id}")
-    public String deletClient(@PathVariable Integer id){
+    public String deletClient(@PathVariable Integer id) {
         clientService.deleteClient(id);
         return "Produto com o id: " + id + " deletado com sucesso!";
     }
+
     @PutMapping("/{id}")
-    public Client updateClient(@RequestBody Client client, @PathVariable Integer id){
+    public Client updateClient(@RequestBody Client client, @PathVariable Integer id) {
         return clientService.updateClient(id, client);
+    }
+
+    public Client getClientByEmailAndPassword(String email, String password) {
+        return clientService.getClientByEmailAndPassword(email, password);
+    }
+
+    public String forgotPassword(String email) {
+        return clientService.getClientByEmail(email);
     }
 }
