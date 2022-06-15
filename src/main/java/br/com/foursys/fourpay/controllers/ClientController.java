@@ -17,7 +17,9 @@ import java.util.Optional;
 public class ClientController {
 
     @Autowired
-    private ClientService clientService;
+    ClientService clientService;
+    @Autowired
+    AccountController accountController;
 
     @GetMapping
     public List<Client> getAll() {
@@ -42,6 +44,7 @@ public class ClientController {
         client.setClientType(determineClientType(registerDto.getMonthlyIncome()));
         client.setAddress(adress);
         addressController.saveAddressFromClientCreation(adress);
+        accountController.createCheckingsAccountFromClientCreation(client);
         return clientService.addClient(client);
     }
 

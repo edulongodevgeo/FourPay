@@ -1,7 +1,11 @@
 package br.com.foursys.fourpay.service;
 
 import br.com.foursys.fourpay.model.Account;
+import br.com.foursys.fourpay.model.CheckingsAccount;
 import br.com.foursys.fourpay.repository.AccountRepository;
+import br.com.foursys.fourpay.repository.CheckingsAccountRepository;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +25,8 @@ import java.util.Optional;
 
 @Service
 public class AccountService {
+    @Autowired
+    CheckingsAccountRepository checkingsAccountRepository;
     final AccountRepository accountRepository;
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -37,5 +43,12 @@ public class AccountService {
 
     public Optional<Account> findById(Integer id) {
         return accountRepository.findById(id);
+    }
+
+    public void createCheckingsAccount(Account account) {
+        CheckingsAccount checkingsAccount = new CheckingsAccount();
+        BeanUtils.copyProperties(account, checkingsAccount);
+        checkingsAccount.setMaintenanceRate(30.00);
+        checkingsAccountRepository.save(checkingsAccount);
     }
 }

@@ -3,6 +3,7 @@ package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.AccountDto;
 import br.com.foursys.fourpay.model.Account;
+import br.com.foursys.fourpay.model.Client;
 import br.com.foursys.fourpay.service.AccountService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,24 @@ public class AccountController {
     }
 
 
+    public void createCheckingsAccountFromClientCreation(Client client) {
+        Account account = new Account();
+        account.setBalance(0.0);
+        account.setClient(client);
+        account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
+        account.setAgency(determineAgency());
+        account.setNumber(determineNumber(accountService.findAll().size()));
+        accountService.createCheckingsAccount(account);
+    }
 
+    private String determineNumber(Integer size) {
+        size = size + 1;
+        return "10000" + size.toString();
+    }
+
+    private String determineAgency() {
+        return "001";
+
+    }
 }
 

@@ -5,10 +5,10 @@ import javax.persistence.Entity;
 
 
 @Entity
-public class CheckingAccount extends Account {
+public class CheckingsAccount extends Account {
 
     @Column(nullable=false)
-    private Double  maintenanceRate;
+    private Double  maintenanceRate = 30.00;
 
     public Double getMaintenanceRate() {
         return maintenanceRate;
