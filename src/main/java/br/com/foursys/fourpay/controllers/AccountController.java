@@ -44,7 +44,7 @@ public class AccountController {
     public ResponseEntity<Object> saveAccount(@RequestBody @Valid AccountDto accountDto){
         var account = new Account();
         BeanUtils.copyProperties(accountDto, account);
-        //account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
+        account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
         account.setClient(clientController.getById(accountDto.getClientId()).get());
         return ResponseEntity.status(HttpStatus.CREATED).body(accountService.save(account));
 
