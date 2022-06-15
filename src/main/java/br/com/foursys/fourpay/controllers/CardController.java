@@ -2,6 +2,8 @@ package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.CardCreationDTO;
 import br.com.foursys.fourpay.dto.CardUpdateDTO;
+import br.com.foursys.fourpay.enums.ClientType;
+import br.com.foursys.fourpay.model.Client;
 import br.com.foursys.fourpay.model.CreditCard;
 import br.com.foursys.fourpay.model.DebitCard;
 import br.com.foursys.fourpay.service.AccountService;
@@ -11,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/card")
@@ -31,10 +31,10 @@ public class CardController {
     public ResponseEntity<Object> postCreateNewCreditCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
         CreditCard creditCard = new CreditCard();
         BeanUtils.copyProperties(cardCreationDTO, creditCard);
-       //creditCard.setAccount(accountService.getAccountById(accountId));
+        creditCard.setAccount(accountService.findById(accountId).get());
         creditCard.setFlag("MASTERCARD");
         creditCard.setCardNumber(generateCardNumber());
-        creditCard.setLimitCredit(determineLimit(creditCard.getAccount().getBalance()));
+        creditCard.setLimitCredit(determineLimit(creditCard.getAccount().getClient()));
         creditCard.setIsActive(true);
         return ResponseEntity.status(HttpStatus.CREATED).body(cardService.saveCreditCard(creditCard));
     }
@@ -59,10 +59,10 @@ public class CardController {
     public ResponseEntity<Object> postCreateNewDebitCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
         DebitCard debitCard = new DebitCard();
         BeanUtils.copyProperties(cardCreationDTO, debitCard);
-        // creditCard.setAccount(accountService.getAccountById(accountId));
+        debitCard.setAccount(accountService.findById(accountId).get());
         debitCard.setFlag("VISA");
         debitCard.setCardNumber(generateCardNumber());
-        debitCard.setTransactionLimit(determineLimit(debitCard.getAccount().getBalance()));
+        debitCard.setTransactionLimit(determineLimit(debitCard.getAccount().getClient()));
         debitCard.setIsActive(true);
         return ResponseEntity.status(HttpStatus.CREATED).body(cardService.saveDebitCard(debitCard));
     }
@@ -79,10 +79,10 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(cardService.saveDebitCard(debitCard));
     }
 
-    private Double determineLimit(Double balance) {
-        if (balance < 2000) {
+    private Double determineLimit(Client client) {
+        if (client.getClientType().equals(ClientType.COMUM)) {
             return 1000.0;
-        } else if (balance < 5000) {
+        } else if (client.getClientType().equals(ClientType.SUPER)) {
             return 2500.0;
         } else {
             return 15000.0;

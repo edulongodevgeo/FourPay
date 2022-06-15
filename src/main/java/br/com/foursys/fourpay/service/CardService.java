@@ -34,6 +34,12 @@ public class CardService {
     }
 
     public CreditCard saveCreditCard(CreditCard creditCard) {
+        List<CreditCard> creditCardList = findAllCreditCard();
+        for (CreditCard item : creditCardList) {
+            if (item.getAccount().getId().equals(creditCard.getAccount().getId())) {
+                return null;
+            }
+        }
         return creditCardRepository.save(creditCard);
     }
 
@@ -58,6 +64,12 @@ public class CardService {
     }
 
     public DebitCard saveDebitCard(DebitCard debitCard) {
+        List<DebitCard> debitCardList = findAllDebitCard();
+        for (DebitCard item : debitCardList) {
+            if (item.getAccount().getId().equals(debitCard.getAccount().getId())) {
+                return null;
+            }
+        }
         return debitCardRepository.save(debitCard);
     }
 
