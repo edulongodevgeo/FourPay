@@ -14,17 +14,17 @@ public class TransactionModel {
     private Double value;
     private LocalDateTime dateOfTransaction;
     private TransactionType transactionType;
-    private String payee;
-    private String payer;
+    private Integer receiverId;
+    private Integer payerId;
     private Double balance;
 
-       public TransactionModel(Integer transactionId, Double value, LocalDateTime dateOfTransaction, TransactionType transactionType, String payee, String payer, Double balance) {
+       public TransactionModel(Integer transactionId, Double value, LocalDateTime dateOfTransaction, TransactionType transactionType, Integer receiverId, Integer payerId, Double balance) {
         this.transactionId = transactionId;
         this.value = value;
         this.dateOfTransaction = dateOfTransaction;
         this.transactionType = transactionType;
-        this.payee = payee;
-        this.payer = payer;
+        this.receiverId = receiverId;
+        this.payerId = transactionId;
         this.balance = balance;
     }
 
@@ -60,22 +60,23 @@ public class TransactionModel {
         this.transactionType = transactionType;
     }
 
-    public String getPayee() {
-        return payee;
-    }
-    public void setPayee(String payee) {
-        this.payee = payee;
-    }
+    public Integer getReceiverId() {
+		return receiverId;
+	}
 
-    public String getPayer() {
-        return payer;
-    }
+	public void setReceiverId(Integer receiverId) {
+		this.receiverId = receiverId;
+	}
 
-    public void setPayer(String payer) {
-        this.payer = payer;
-    }
+	public Integer getPayerId() {
+		return payerId;
+	}
 
-    public Double getBalance() {
+	public void setPayerId(Integer payerId) {
+		this.payerId = payerId;
+	}
+
+	public Double getBalance() {
         return balance;
     }
 
