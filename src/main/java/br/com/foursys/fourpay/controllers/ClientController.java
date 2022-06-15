@@ -39,10 +39,20 @@ public class ClientController {
         Address adress = new Address();
         BeanUtils.copyProperties(registerDto, client);
         BeanUtils.copyProperties(registerDto, adress);
-        client.setClientType(ClientType.COMUM);
+        client.setClientType(determineClientType(registerDto.getMonthlyIncome()));
         client.setAddress(adress);
         addressController.saveAddressFromClientCreation(adress);
         return clientService.addClient(client);
+    }
+
+    private ClientType determineClientType(Double monthlyIncome) {
+        if (monthlyIncome < 3000) {
+            return ClientType.COMUM;
+        } else if (monthlyIncome >= 3000 && monthlyIncome < 7000) {
+            return ClientType.SUPER;
+        } else {
+            return ClientType.PREMIUM;
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -53,6 +63,7 @@ public class ClientController {
 
     @PutMapping("/{id}")
     public Client updateClient(@RequestBody Client client, @PathVariable Integer id) {
+        client.setClientType(determineClientType(client.getMonthlyIncome()));
         return clientService.updateClient(id, client);
     }
 
