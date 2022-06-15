@@ -1,11 +1,13 @@
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class Policy {
-	@Id
-    private Integer policyNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @OneToOne
     @JoinColumn(name = "credit_card_limit_credit")
@@ -35,20 +37,20 @@ public class Policy {
 
     public Policy() {
     }
-    public Policy(Integer policyNumber, CreditCard creditCard, Insurance insurance, Double valuePolicy, String conditionsDescriptions) {
-        this.policyNumber = policyNumber;
+    public Policy(UUID id, CreditCard creditCard, Insurance insurance, Double valuePolicy, String conditionsDescriptions) {
+        this.id = id;
         this.creditCard = creditCard;
         this.insurance = insurance;
         this.valuePolicy = valuePolicy;
         this.conditionsDescriptions = conditionsDescriptions;
     }
 
-    public Integer getPolicyNumber() {
-        return policyNumber;
+    public UUID getId() {
+        return id;
     }
 
-    public void setPolicyNumber(Integer policyNumber) {
-        this.policyNumber = policyNumber;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public Double getValuePolicy() {
