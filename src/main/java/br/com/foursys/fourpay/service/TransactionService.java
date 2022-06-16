@@ -118,4 +118,18 @@ public class TransactionService {
                 + ". Valor: " + recharge.getValue() + ".");
         transactionRepository.save(transaction);
     }
+
+    public Object transferPix(Transaction transaction) {
+        Account payerAccount = accountService.findById(transaction.getPayerId()).get();
+        Account receiverAccount = accountService.findById(transaction.getReceiverId()).get();
+        if (payerAccount.getBalance() >= transaction.getValue()) {
+            payerAccount.setBalance(payerAccount.getBalance() - transaction.getValue());
+            accountService.save(payerAccount);
+            receiverAccount.setBalance(receiverAccount.getBalance() + transaction.getValue());
+            accountService.save(receiverAccount);
+            return transactionRepository.save(transaction);
+        } else {
+            return null;
+        }
+    }
 }
