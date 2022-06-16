@@ -16,6 +16,12 @@ public class PixService {
         if (pix.getPixKeyType() == null) {
             return null;
         }
+        List<Pix> pixList = pixRepository.findAll();
+        for (Pix item : pixList) {
+            if (item.getPixKeyType().equals(pix.getPixKeyType()) && item.getAccount().getId().equals(pix.getAccount().getId())) {
+                return null;
+            }
+        }
         return pixRepository.save(pix);
     }
 

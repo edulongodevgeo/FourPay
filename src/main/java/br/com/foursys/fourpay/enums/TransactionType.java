@@ -6,7 +6,8 @@ public enum TransactionType {
     PIX(2),
     DEPOSIT(3),
     WITHDRAW(4),
-    TRANSFER(5);
+    TRANSFER(5),
+    RECHARGE(6);
 
     private Integer id;
 

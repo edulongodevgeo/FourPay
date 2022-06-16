@@ -3,10 +3,7 @@ package br.com.foursys.fourpay.service;
 import br.com.foursys.fourpay.dto.PaymentWithCreditDTO;
 import br.com.foursys.fourpay.dto.PaymentWithDebitDTO;
 import br.com.foursys.fourpay.enums.TransactionType;
-import br.com.foursys.fourpay.model.Account;
-import br.com.foursys.fourpay.model.CreditCard;
-import br.com.foursys.fourpay.model.DebitCard;
-import br.com.foursys.fourpay.model.Transaction;
+import br.com.foursys.fourpay.model.*;
 import br.com.foursys.fourpay.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,6 +104,18 @@ public class TransactionService {
         transaction.setPayerId(debitCard.getAccount().getId());
         transaction.setReceiverId(null);
         transaction.setDescription(paymentWithDebitDTO.getDescription());
+        transactionRepository.save(transaction);
+    }
+
+    public void rechargeCellPhone(Recharge recharge) {
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(TransactionType.RECHARGE);
+        transaction.setDateOfTransaction(LocalDateTime.now());
+        transaction.setValue(recharge.getValue());
+        transaction.setPayerId(null);
+        transaction.setReceiverId(null);
+        transaction.setDescription("Recarga efetuada no número " + recharge.getCellphoneNumber()
+                + ". Valor: " + recharge.getValue() + ".");
         transactionRepository.save(transaction);
     }
 }
