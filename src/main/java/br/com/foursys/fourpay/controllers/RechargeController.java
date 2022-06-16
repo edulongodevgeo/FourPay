@@ -1,6 +1,7 @@
 package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.RechargeDTO;
+import br.com.foursys.fourpay.enums.TransactionType;
 import br.com.foursys.fourpay.model.Recharge;
 import br.com.foursys.fourpay.service.RechargeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,11 @@ public class RechargeController {
         recharge.setCellphoneProvider(rechargeDTO.getCellphoneProvider());
         recharge.setCellphoneNumber(rechargeDTO.getCellphoneNumber());
         recharge.setValue(rechargeDTO.getValue());
-        recharge.setPaymentMethod(rechargeDTO.getPaymentMethod());
-
+        if(!rechargeDTO.getPaymentMethod().equals(TransactionType.DEPOSIT) || !rechargeDTO.getPaymentMethod().equals(TransactionType.WITHDRAW)) {
+            recharge.setPaymentMethod(rechargeDTO.getPaymentMethod());
+        } else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment method invalid");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(rechargeService.recharge(recharge));
     }
 }

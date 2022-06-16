@@ -109,7 +109,7 @@ public class TransactionService {
 
     public void rechargeCellPhone(Recharge recharge) {
         Transaction transaction = new Transaction();
-        transaction.setTransactionType(TransactionType.RECHARGE);
+        transaction.setTransactionType(recharge.getPaymentMethod());
         transaction.setDateOfTransaction(LocalDateTime.now());
         transaction.setValue(recharge.getValue());
         transaction.setPayerId(null);

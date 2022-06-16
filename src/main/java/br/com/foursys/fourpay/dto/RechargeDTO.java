@@ -1,12 +1,13 @@
 package br.com.foursys.fourpay.dto;
 
 import br.com.foursys.fourpay.enums.CellPhoneProvider;
+import br.com.foursys.fourpay.enums.TransactionType;
 
 public class RechargeDTO {
     private String cellphoneNumber;
     private CellPhoneProvider cellphoneProvider;
     private Double value;
-    private String paymentMethod;
+    private TransactionType paymentMethod;
 
     public String getCellphoneNumber() {
         return cellphoneNumber;
@@ -32,11 +33,11 @@ public class RechargeDTO {
         this.value = value;
     }
 
-    public String getPaymentMethod() {
+    public TransactionType getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(TransactionType paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 }
