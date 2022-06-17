@@ -32,8 +32,7 @@ public class PolicyService {
 //    }
 
 
-    @Transactional
-    public Policy save(Policy policy) {
+        public Policy save(Policy policy) {
         List<Policy> policyList = policyRepository.findAll();
         for (Policy item : policyList) {
             if (item.getCreditCard().getCardNumber().equals(policy.getCreditCard().getCardNumber())) {

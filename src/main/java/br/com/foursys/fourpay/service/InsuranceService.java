@@ -13,13 +13,6 @@ public class InsuranceService {
         @Autowired
         private InsuranceRepository insuranceRepository;
 
-//   public Insurance registerInsurence(String name, String rules){
-//   Insurance insurance = new Insurance();
-//            insurance.setName(name);
-//            insurance.setName(rules);
-//            return repository.save(insurance);
-//        }
-
     public List<Insurance> getAllInsurance(){
         return insuranceRepository.findAll();
     }

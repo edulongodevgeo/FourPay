@@ -19,7 +19,7 @@ public class CardPaymentsController {
 
     @PostMapping("/credit")
     public ResponseEntity<Object> paymentWithCredit(@RequestBody PaymentWithCreditDTO paymentWithCreditDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body(cardPaymentsService.paymentWithCredit(paymentWithCreditDTO));
+        return ResponseEntity.status(HttpStatus.OK).body(cardPaymentsService.paymentWithCredit(paymentWithCreditDTO)); 
     }
 
     @PostMapping("/debit")

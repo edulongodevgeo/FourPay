@@ -30,7 +30,7 @@ public class Client {
     public Client() {
     }
 
-    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType, Address address) {
+    public Client(String name, String cpf, String password, String email, String cellphone, ClientType clientType, Address address, LocalDate birthDate) {
         this.name = name;
         this.cpf = cpf;
         this.birthDate = birthDate;

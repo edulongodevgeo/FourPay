@@ -35,7 +35,7 @@ public class ClientController {
     AddressController addressController;
 
     @PostMapping
-    public Client addClient(@RequestBody RegisterDto registerDto) {
+    public Object addClient(@RequestBody RegisterDto registerDto) {
 
         Client client = new Client();
         Address adress = new Address();
@@ -44,8 +44,8 @@ public class ClientController {
         client.setClientType(determineClientType(registerDto.getMonthlyIncome()));
         client.setAddress(adress);
         addressController.saveAddressFromClientCreation(adress);
-        accountController.createCheckingsAccountFromClientCreation(client);
-        return clientService.addClient(client);
+        clientService.addClient(client);
+        return accountController.createCheckingsAccountFromClientCreation(client);
     }
 
     private ClientType determineClientType(Double monthlyIncome) {

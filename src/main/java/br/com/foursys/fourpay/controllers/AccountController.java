@@ -90,7 +90,7 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.OK).body(accountService.updateAllSavingsAccountsByAnniversary());
     }
 
-    public void createCheckingsAccountFromClientCreation(Client client) {
+    public Object createCheckingsAccountFromClientCreation(Client client) {
         CheckingsAccount checkingsAccount = new CheckingsAccount();
         checkingsAccount.setBalance(0.0);
         checkingsAccount.setClient(client);
@@ -99,7 +99,7 @@ public class AccountController {
         checkingsAccount.setAgency(determineAgency());
         checkingsAccount.setNumber(determineNumber(accountService.findAll().size()));
         checkingsAccount.setMaintenanceRate(30.00);
-        accountService.createCheckingsAccount(checkingsAccount);
+        return accountService.createCheckingsAccount(checkingsAccount);
     }
 
     @PostMapping("/savings")

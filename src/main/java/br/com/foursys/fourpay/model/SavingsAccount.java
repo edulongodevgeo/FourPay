@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class SavingsAccount extends Account {
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Double yieldRate;
 
     public Double getYieldRate() {

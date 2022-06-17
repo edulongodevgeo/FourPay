@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 @Service
 public class ClientService {
     @Autowired
@@ -21,6 +23,7 @@ public class ClientService {
         return clientRepository.findById(id);
     }
 
+    @Transactional
     public Client addClient(Client client) {
         List<Client> clients = clientRepository.findAll();
         for (Client item : clients) {

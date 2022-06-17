@@ -55,16 +55,9 @@ public class PolicyController {
         policy.setValuePolicy(200.0);
         policy.setId(UUID.randomUUID());
         policy.setInsurance(insuranceService.getInsuranceId(policyDTO.getInsurance()).get());
-        policy.setCreditCard(cardService.findCreditById(policyDTO.getCreditCard()).get());
+        policy.setCreditCard(cardService.findCreditById(policyDTO.getCreditCard()));
         policy.setDatePolicy(LocalDate.now());
-        policy.setConditionsDescriptions("Condições da apolice:" + policy.getInsurance().getName()
-                + ". O cartão de número: "
-                + policy.getCreditCard().getCardNumber()
-                + " está vinculado ao seguro de número "
-                + policy.getId() + ". "
-                + "A data da apolice é " + policy.getDatePolicy() + "."
-                + "O valor da apolice é " + policy.getValuePolicy() + "."
-                + "As condições de acionamento do seguro são " + policy.getInsurance().getRules() + ".");
+        policy.setConditionsDescriptions("Para mais informações ligue para 0800-1234-1234.");
         return ResponseEntity.status(HttpStatus.CREATED).body(policyService.save(policy));
     }
     @DeleteMapping("/{id}")
