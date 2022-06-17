@@ -43,8 +43,15 @@ public class CardService {
         return creditCardRepository.save(creditCard);
     }
 
-    public Optional<CreditCard> findCreditById (Integer id){
-        return creditCardRepository.findById(id);
+    public CreditCard findCreditById (String string){
+    	List<CreditCard> creditCardList = findAllCreditCard();
+        for (CreditCard item : creditCardList) {
+            if (item.getCardNumber().equals(string)) {
+                return item;
+                
+            }
+        }
+    	return null;
     }
 
     // DEBIT CARD METHODS STARTS HERE
@@ -76,4 +83,8 @@ public class CardService {
     public Optional<DebitCard> findDebitById(Integer debitCardId) {
         return debitCardRepository.findById(debitCardId);
     }
+
+	public Optional<CreditCard> findCreditById(Integer creditCardId) {
+		return creditCardRepository.findById(creditCardId);
+	}
 }

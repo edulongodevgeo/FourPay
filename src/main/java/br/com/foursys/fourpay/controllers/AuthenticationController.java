@@ -27,7 +27,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<Object> register(@RequestBody RegisterDto registerDto) {
-        Client client = clientController.addClient(registerDto);
+        Object client = clientController.addClient(registerDto);
         if (client != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(client);
         }

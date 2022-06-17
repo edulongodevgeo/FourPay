@@ -7,12 +7,16 @@ import javax.persistence.*;
 import java.util.UUID;
 
 public class PolicyDTO {
+	
+    private String creditCard;
 
-    public Integer getCreditCard() {
+    private Integer insurance;
+
+    public String getCreditCard() {
         return creditCard;
     }
 
-    public void setCreditCard(Integer creditCard) {
+    public void setCreditCard(String creditCard) {
         this.creditCard = creditCard;
     }
 
@@ -23,10 +27,6 @@ public class PolicyDTO {
     public void setInsurance(Integer insurance) {
         this.insurance = insurance;
     }
-
-    private Integer creditCard;
-
-    private Integer insurance;
 
 
 }

@@ -50,14 +50,17 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    public void createCheckingsAccount(CheckingsAccount account) {
-        checkingsAccountRepository.save(account);
+    @Transactional
+    public Object createCheckingsAccount(CheckingsAccount account) {
+       return  checkingsAccountRepository.save(account);
     }
 
+    @Transactional
     public Object createSavingsAccount(SavingsAccount savingsAccount) {
         return savingsAccountRepository.save(savingsAccount);
     }
 
+    @Transactional
     public boolean updateBalance(Account account, Double value) {
         if (account.getBalance() >= value) {
             account.setBalance(account.getBalance() - value);

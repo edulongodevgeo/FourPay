@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/transaction")
@@ -49,5 +50,16 @@ public class TransactionController {
         }
         return transactionService.transferPix(transaction);
     }
+    
+    @GetMapping("/statement/") 
+        public List<Transaction> getAll(){
+    		return transactionService.getAllTransaction();    	
+    }
+    
+    @GetMapping("/statement/{id}") 
+    public List<Transaction> getById(@PathVariable Integer id){
+		return transactionService.getByIdTransaction(id);    	
+}
+
 
 }
