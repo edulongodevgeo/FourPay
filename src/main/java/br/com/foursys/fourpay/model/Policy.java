@@ -1,6 +1,7 @@
 package br.com.foursys.fourpay.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -10,9 +11,10 @@ public class Policy {
     private UUID id;
 
     @OneToOne
-    @JoinColumn(name = "credit_card_limit_credit")
+    @JoinColumn(name = "card_id")
     private CreditCard creditCard;
 
+    private LocalDate datePolicy;
     @OneToOne
     @JoinColumn(name = "insurance_id")
     private Insurance insurance;
@@ -27,6 +29,17 @@ public class Policy {
         this.insurance = insurance;
     }
 
+    public Policy() {
+    }
+
+    public Policy(UUID id, CreditCard creditCard, Insurance insurance, Double valuePolicy, String conditionsDescriptions) {
+        this.id = id;
+        this.creditCard = creditCard;
+        this.insurance = insurance;
+        this.valuePolicy = valuePolicy;
+        this.conditionsDescriptions = conditionsDescriptions;
+    }
+
     public CreditCard getCreditCard() {
         return creditCard;
     }
@@ -35,14 +48,12 @@ public class Policy {
         this.creditCard = creditCard;
     }
 
-    public Policy() {
+    public LocalDate getDatePolicy() {
+        return datePolicy;
     }
-    public Policy(UUID id, CreditCard creditCard, Insurance insurance, Double valuePolicy, String conditionsDescriptions) {
-        this.id = id;
-        this.creditCard = creditCard;
-        this.insurance = insurance;
-        this.valuePolicy = valuePolicy;
-        this.conditionsDescriptions = conditionsDescriptions;
+
+    public void setDatePolicy(LocalDate datePolicy) {
+        this.datePolicy = datePolicy;
     }
 
     public UUID getId() {

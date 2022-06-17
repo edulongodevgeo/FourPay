@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -51,11 +52,19 @@ public class PolicyController {
     @PostMapping
     public ResponseEntity<Object> savePolicy(@RequestBody @Valid PolicyDTO policyDTO){
         var policy = new Policy();
-        policy.setConditionsDescriptions("Condições exemplo");
         policy.setValuePolicy(200.0);
         policy.setId(UUID.randomUUID());
         policy.setInsurance(insuranceService.getInsuranceId(policyDTO.getInsurance()).get());
         policy.setCreditCard(cardService.findCreditById(policyDTO.getCreditCard()).get());
+        policy.setDatePolicy(LocalDate.now());
+        policy.setConditionsDescriptions("Condições da apolice:" + policy.getInsurance().getName()
+                + ". O cartão de número: "
+                + policy.getCreditCard().getCardNumber()
+                + " está vinculado ao seguro de número "
+                + policy.getId() + ". "
+                + "A data da apolice é " + policy.getDatePolicy() + "."
+                + "O valor da apolice é " + policy.getValuePolicy() + "."
+                + "As condições de acionamento do seguro são " + policy.getInsurance().getRules() + ".");
         return ResponseEntity.status(HttpStatus.CREATED).body(policyService.save(policy));
     }
     @DeleteMapping("/{id}")

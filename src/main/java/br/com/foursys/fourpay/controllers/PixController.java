@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-//ss
+
 @RestController
 @RequestMapping ("/pix")
 public class PixController {

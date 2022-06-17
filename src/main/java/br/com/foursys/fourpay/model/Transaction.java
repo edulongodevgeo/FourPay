@@ -1,32 +1,25 @@
 package br.com.foursys.fourpay.model;
 
 import br.com.foursys.fourpay.enums.TransactionType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+
 @Entity
-public class TransactionModel {
+public class Transaction {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transactionId;
     private Double value;
     private LocalDateTime dateOfTransaction;
     private TransactionType transactionType;
     private Integer receiverId;
     private Integer payerId;
-    private Double balance;
+    private String description;
 
-       public TransactionModel(Integer transactionId, Double value, LocalDateTime dateOfTransaction, TransactionType transactionType, Integer receiverId, Integer payerId, Double balance) {
-        this.transactionId = transactionId;
-        this.value = value;
-        this.dateOfTransaction = dateOfTransaction;
-        this.transactionType = transactionType;
-        this.receiverId = receiverId;
-        this.payerId = transactionId;
-        this.balance = balance;
-    }
 
     public Integer getTransactionId() {
         return transactionId;
@@ -61,26 +54,26 @@ public class TransactionModel {
     }
 
     public Integer getReceiverId() {
-		return receiverId;
-	}
-
-	public void setReceiverId(Integer receiverId) {
-		this.receiverId = receiverId;
-	}
-
-	public Integer getPayerId() {
-		return payerId;
-	}
-
-	public void setPayerId(Integer payerId) {
-		this.payerId = payerId;
-	}
-
-	public Double getBalance() {
-        return balance;
+        return receiverId;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public void setReceiverId(Integer receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public Integer getPayerId() {
+        return payerId;
+    }
+
+    public void setPayerId(Integer payerId) {
+        this.payerId = payerId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

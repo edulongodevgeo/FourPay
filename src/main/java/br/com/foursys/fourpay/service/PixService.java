@@ -1,5 +1,6 @@
 package br.com.foursys.fourpay.service;
 
+import br.com.foursys.fourpay.enums.PixKeyType;
 import br.com.foursys.fourpay.model.Pix;
 import br.com.foursys.fourpay.repository.PixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,12 @@ public class PixService {
         if (pix.getPixKeyType() == null) {
             return null;
         }
+        List<Pix> pixList = pixRepository.findAll();
+        for (Pix item : pixList) {
+            if (item.getPixKeyType().equals(pix.getPixKeyType()) && item.getAccount().getId().equals(pix.getAccount().getId())) {
+                return null;
+            }
+        }
         return pixRepository.save(pix);
     }
 
@@ -28,6 +35,16 @@ public class PixService {
         for (Pix item : pixList) {
             if (item.getId().equals(id)){
                 return item;
+            }
+        }
+        return null;
+    }
+
+    public Integer getPixByKeyValueAndKeyType(String keyValue, PixKeyType keyType) {
+        List<Pix> pixList = findAll();
+        for (Pix item : pixList) {
+            if (item.getPixKeyType().equals(keyType) && item.getKeyValue().equals(keyValue)){
+                return item.getAccount().getId();
             }
         }
         return null;

@@ -24,6 +24,8 @@ public class Account {
     @Column(nullable = false)
     private LocalDateTime registrationDateAccount;
 
+    private LocalDateTime accountAniversary;
+
     public Client getClient() {
         return client;
     }
@@ -63,5 +65,13 @@ public class Account {
     }
     public void setRegistrationDateAccount(LocalDateTime registrationDateAccount) {
         this.registrationDateAccount = registrationDateAccount;
+    }
+
+    public LocalDateTime getAccountAniversary() {
+        return accountAniversary;
+    }
+
+    public void setAccountAniversary(LocalDateTime accountAniversary) {
+        this.accountAniversary = accountAniversary;
     }
 }
