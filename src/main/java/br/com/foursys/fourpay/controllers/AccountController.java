@@ -8,6 +8,7 @@ import br.com.foursys.fourpay.model.CheckingsAccount;
 import br.com.foursys.fourpay.model.Client;
 import br.com.foursys.fourpay.model.SavingsAccount;
 import br.com.foursys.fourpay.service.AccountService;
+import br.com.foursys.fourpay.service.ClientService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,14 +29,11 @@ import java.util.Optional;
 @RequestMapping("/account")
 
 public class AccountController {
-    final AccountService accountService;
-
-    public AccountController(AccountService accountService) {
-
-        this.accountService = accountService;
-    }
     @Autowired
-    ClientController clientController;
+    AccountService accountService;
+    @Autowired
+    ClientService clientService;
+
     // Não definimos uri pois ja foi setado a nivel de classe /account
     // ReponseEntity e para montar resposta com status e corpo e colocou object por causa dos diferentes tipos de retorno
     // Recebemos o dto para  salvar todos os campos que cliente envia e seja salvo
@@ -49,7 +47,7 @@ public class AccountController {
         var account = new Account();
         BeanUtils.copyProperties(accountDto, account);
         account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
-        account.setClient(clientController.getById(accountDto.getClientId()).get());
+        account.setClient(clientService.getClientId(accountDto.getClientId()).get());
         return ResponseEntity.status(HttpStatus.CREATED).body(accountService.save(account));
 
     }
@@ -110,7 +108,7 @@ public class AccountController {
         BeanUtils.copyProperties(SavingsAccountDto, savingsAccount);
         savingsAccount.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
         savingsAccount.setAccountAniversary(LocalDateTime.now(ZoneId.of("UTC")));
-        savingsAccount.setClient(clientController.getById(SavingsAccountDto.getClientId()).get());
+        savingsAccount.setClient(clientService.getClientId(SavingsAccountDto.getClientId()).get());
         savingsAccount.setAgency(determineAgency());
         savingsAccount.setNumber(determineNumber(accountService.findAll().size()));
         savingsAccount.setYieldRate(5.00);
