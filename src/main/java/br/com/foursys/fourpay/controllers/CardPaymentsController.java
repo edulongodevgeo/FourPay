@@ -2,6 +2,9 @@ package br.com.foursys.fourpay.controllers;
 
 import br.com.foursys.fourpay.dto.PaymentWithCreditDTO;
 import br.com.foursys.fourpay.dto.PaymentWithDebitDTO;
+import br.com.foursys.fourpay.model.CreditCard;
+import br.com.foursys.fourpay.model.DebitCard;
+import br.com.foursys.fourpay.model.Transaction;
 import br.com.foursys.fourpay.service.CardPaymentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +21,12 @@ public class CardPaymentsController {
     CardPaymentsService cardPaymentsService;
 
     @PostMapping("/credit")
-    public ResponseEntity<Object> paymentWithCredit(@RequestBody PaymentWithCreditDTO paymentWithCreditDTO) {
+    public ResponseEntity<Transaction> paymentWithCredit(@RequestBody PaymentWithCreditDTO paymentWithCreditDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(cardPaymentsService.paymentWithCredit(paymentWithCreditDTO)); 
     }
 
     @PostMapping("/debit")
-    public ResponseEntity<Object> paymentWithDebit(@RequestBody PaymentWithDebitDTO paymentWithDebitDTO) {
+    public ResponseEntity<Transaction> paymentWithDebit(@RequestBody PaymentWithDebitDTO paymentWithDebitDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(cardPaymentsService.paymentWithDebit(paymentWithDebitDTO));
     }
 

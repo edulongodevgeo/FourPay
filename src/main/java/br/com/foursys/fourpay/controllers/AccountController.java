@@ -43,7 +43,7 @@ public class AccountController {
     // Metodo save não existe, precisa criar ele para receber o account e retorna o mesmo com o uuid
 
     @PostMapping
-    public ResponseEntity<Object> saveAccount(@RequestBody @Valid AccountDto accountDto){
+    public ResponseEntity<Account> saveAccount(@RequestBody @Valid AccountDto accountDto){
         var account = new Account();
         BeanUtils.copyProperties(accountDto, account);
         account.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));
@@ -58,22 +58,20 @@ public class AccountController {
 
     @GetMapping("/{id}")
 
-    public ResponseEntity<Object> getOneAccount(@PathVariable(value = "id")Integer id){
-
-
+    public ResponseEntity<Account> getOneAccount(@PathVariable(value = "id")Integer id){
         Optional<Account> accountOptional = accountService.findById(id);
         if (!accountOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.status(HttpStatus.OK).body(accountOptional.get());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateAccount(@PathVariable(value = "id")Integer id, @RequestBody @Valid AccountDto accountDto){
+    public ResponseEntity<Account> updateAccount(@PathVariable(value = "id")Integer id, @RequestBody @Valid AccountDto accountDto){
 
         Optional<Account> accountOptional = accountService.findById(id);
         if(!accountOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Account not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         var account = accountOptional.get();
         account.setBalance(accountDto.getBalance());
@@ -90,7 +88,7 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.OK).body(accountService.updateAllSavingsAccountsByAnniversary());
     }
 
-    public Object createCheckingsAccountFromClientCreation(Client client) {
+    public CheckingsAccount createCheckingsAccountFromClientCreation(Client client) {
         CheckingsAccount checkingsAccount = new CheckingsAccount();
         checkingsAccount.setBalance(0.0);
         checkingsAccount.setClient(client);
@@ -103,7 +101,7 @@ public class AccountController {
     }
 
     @PostMapping("/savings")
-    public ResponseEntity<Object> saveSavingsAccount(@RequestBody @Valid SavingsAccountDTO SavingsAccountDto) {
+    public ResponseEntity<SavingsAccount> saveSavingsAccount(@RequestBody @Valid SavingsAccountDTO SavingsAccountDto) {
         var savingsAccount = new SavingsAccount();
         BeanUtils.copyProperties(SavingsAccountDto, savingsAccount);
         savingsAccount.setRegistrationDateAccount(LocalDateTime.now(ZoneId.of("UTC")));

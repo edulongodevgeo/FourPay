@@ -21,7 +21,7 @@ public class TransactionService {
 	@Autowired
 	TransactionRepository transactionRepository;
 
-	public Object depositValue(Integer accountId, Double depositValue) {
+	public Transaction depositValue(Integer accountId, Double depositValue) {
 		Account account = accountService.findById(accountId).get();
 		account.setBalance(account.getBalance() + depositValue);
 		accountService.save(account);
@@ -32,12 +32,10 @@ public class TransactionService {
 		transaction.setValue(depositValue);
 		transaction.setPayerId(accountId);
 		transaction.setReceiverId(accountId);
-		transactionRepository.save(transaction);
-
-		return account;
+		return transactionRepository.save(transaction);
 	}
 
-	public Object withdrawValue(Integer accountId, Double withdrawValue) {
+	public Transaction withdrawValue(Integer accountId, Double withdrawValue) {
 		Account account = accountService.findById(accountId).get();
 		if (account.getBalance() >= withdrawValue) {
 			account.setBalance(account.getBalance() - withdrawValue);
@@ -49,15 +47,13 @@ public class TransactionService {
 			transaction.setValue(withdrawValue);
 			transaction.setPayerId(accountId);
 			transaction.setReceiverId(accountId);
-			transactionRepository.save(transaction);
-
-			return account;
+			return transactionRepository.save(transaction);
 		} else {
 			return null;
 		}
 	}
 
-	public Object transferValue(Integer payerId, Integer receiverId, Double transferValue) {
+	public Transaction transferValue(Integer payerId, Integer receiverId, Double transferValue) {
 		Account accountPayer = accountService.findById(payerId).get();
 		Account accountReceiver = accountService.findById(receiverId).get();
 		if (accountPayer.getBalance() >= transferValue) {
@@ -72,9 +68,7 @@ public class TransactionService {
 			transaction.setValue(transferValue);
 			transaction.setPayerId(payerId);
 			transaction.setReceiverId(receiverId);
-			transactionRepository.save(transaction);
-
-			return accountPayer;
+			return transactionRepository.save(transaction);
 		} else {
 			return null;
 		}
@@ -87,7 +81,7 @@ public class TransactionService {
 		}
 	}
 
-	public void saveCreditPayment(CreditCard creditCard, PaymentWithCreditDTO paymentWithCreditDTO) {
+	public Transaction saveCreditPayment(CreditCard creditCard, PaymentWithCreditDTO paymentWithCreditDTO) {
 		Transaction transaction = new Transaction();
 		transaction.setTransactionType(TransactionType.CREDIT);
 		transaction.setDateOfTransaction(LocalDateTime.now());
@@ -95,10 +89,10 @@ public class TransactionService {
 		transaction.setPayerId(creditCard.getAccount().getId());
 		transaction.setReceiverId(null);
 		transaction.setDescription(paymentWithCreditDTO.getDescription());
-		transactionRepository.save(transaction);
+		return transactionRepository.save(transaction);
 	}
 
-	public void saveDebitPayment(DebitCard debitCard, PaymentWithDebitDTO paymentWithDebitDTO) {
+	public Transaction saveDebitPayment(DebitCard debitCard, PaymentWithDebitDTO paymentWithDebitDTO) {
 		Transaction transaction = new Transaction();
 		transaction.setTransactionType(TransactionType.DEBIT);
 		transaction.setDateOfTransaction(LocalDateTime.now());
@@ -106,7 +100,7 @@ public class TransactionService {
 		transaction.setPayerId(debitCard.getAccount().getId());
 		transaction.setReceiverId(null);
 		transaction.setDescription(paymentWithDebitDTO.getDescription());
-		transactionRepository.save(transaction);
+		return transactionRepository.save(transaction);
 	}
 
 	public void rechargeCellPhone(Recharge recharge) {
@@ -121,7 +115,7 @@ public class TransactionService {
 		transactionRepository.save(transaction);
 	}
 
-	public Object transferPix(Transaction transaction) {
+	public Transaction transferPix(Transaction transaction) {
 		Account payerAccount = accountService.findById(transaction.getPayerId()).get();
 		Account receiverAccount = accountService.findById(transaction.getReceiverId()).get();
 		if (payerAccount.getBalance() >= transaction.getValue()) {

@@ -12,7 +12,7 @@ public class RechargeService {
     RechargeRepository rechargeRepository;
     @Autowired
     TransactionService transactionService;
-    public Object recharge(Recharge recharge) {
+    public Recharge recharge(Recharge recharge) {
         transactionService.rechargeCellPhone(recharge);
         return rechargeRepository.save(recharge);
     }

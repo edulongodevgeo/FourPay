@@ -51,12 +51,12 @@ public class AccountService {
     }
 
     @Transactional
-    public Object createCheckingsAccount(CheckingsAccount account) {
+    public CheckingsAccount createCheckingsAccount(CheckingsAccount account) {
        return  checkingsAccountRepository.save(account);
     }
 
     @Transactional
-    public Object createSavingsAccount(SavingsAccount savingsAccount) {
+    public SavingsAccount createSavingsAccount(SavingsAccount savingsAccount) {
         return savingsAccountRepository.save(savingsAccount);
     }
 
