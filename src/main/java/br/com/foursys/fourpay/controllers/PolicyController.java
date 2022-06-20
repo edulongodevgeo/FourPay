@@ -41,16 +41,16 @@ public class PolicyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getById(@PathVariable(value = "id")UUID id){
+    public ResponseEntity<Policy> getById(@PathVariable(value = "id")UUID id){
         Optional<Policy> policyOptional = policyService.findById(id);
         if (!policyOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Policy not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.status(HttpStatus.OK).body(policyOptional.get());
     }
 
     @PostMapping
-    public ResponseEntity<Object> savePolicy(@RequestBody @Valid PolicyDTO policyDTO){
+    public ResponseEntity<Policy> savePolicy(@RequestBody @Valid PolicyDTO policyDTO){
         var policy = new Policy();
         policy.setValuePolicy(200.0);
         policy.setId(UUID.randomUUID());

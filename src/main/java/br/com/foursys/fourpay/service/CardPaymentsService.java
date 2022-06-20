@@ -4,6 +4,7 @@ import br.com.foursys.fourpay.dto.PaymentWithCreditDTO;
 import br.com.foursys.fourpay.dto.PaymentWithDebitDTO;
 import br.com.foursys.fourpay.model.CreditCard;
 import br.com.foursys.fourpay.model.DebitCard;
+import br.com.foursys.fourpay.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,30 +20,28 @@ public class CardPaymentsService {
     AccountService accountService;
 
     
-    public Object paymentWithCredit(PaymentWithCreditDTO paymentWithCreditDTO) {
+    public Transaction paymentWithCredit(PaymentWithCreditDTO paymentWithCreditDTO) {
         CreditCard creditCard = cardService.findCreditById(paymentWithCreditDTO.getCreditCardId()).get();
         if (creditCard.getLimitCredit() >= paymentWithCreditDTO.getValue() + CREDIT_CARD_FEE) {
             creditCard.setLimitCredit(creditCard.getLimitCredit() - paymentWithCreditDTO.getValue() + CREDIT_CARD_FEE);
             cardService.saveCreditCard(creditCard);
-            transactionService.saveCreditPayment(creditCard, paymentWithCreditDTO);
-            return creditCard;
+            return transactionService.saveCreditPayment(creditCard, paymentWithCreditDTO);
         } else {
-            return "Payment not allowed, montlhy limit exceeded";
+            return null;
         }
 
     }
 
-    public Object paymentWithDebit(PaymentWithDebitDTO paymentWithDebitDTO) {
+    public Transaction paymentWithDebit(PaymentWithDebitDTO paymentWithDebitDTO) {
         DebitCard debitCard = cardService.findDebitById(paymentWithDebitDTO.getDebitCardId()).get();
         if (debitCard.getTransactionLimit() >= paymentWithDebitDTO.getValue() + DEBIT_CARD_FEE) {
             debitCard.setTransactionLimit(debitCard.getTransactionLimit() - paymentWithDebitDTO.getValue() + DEBIT_CARD_FEE);
             if (accountService.updateBalance(debitCard.getAccount(), paymentWithDebitDTO.getValue())) {
                 cardService.saveDebitCard(debitCard);
-                transactionService.saveDebitPayment(debitCard, paymentWithDebitDTO);
-                return debitCard;
+                return transactionService.saveDebitPayment(debitCard, paymentWithDebitDTO);
             }
         }
-        return "Payment not allowed, daily limit exceeded or not enough balance";
+        return null;
 
     }
 }

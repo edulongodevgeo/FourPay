@@ -20,7 +20,7 @@ public class RechargeController {
     RechargeService rechargeService;
 
     @PostMapping
-    public ResponseEntity<Object> recharge(@RequestBody RechargeDTO rechargeDTO) {
+    public ResponseEntity<Recharge> recharge(@RequestBody RechargeDTO rechargeDTO) {
         Recharge recharge = new Recharge();
         recharge.setCellphoneProvider(rechargeDTO.getCellphoneProvider());
         recharge.setCellphoneNumber(rechargeDTO.getCellphoneNumber());
@@ -28,7 +28,7 @@ public class RechargeController {
         if(!rechargeDTO.getPaymentMethod().equals(TransactionType.DEPOSIT) || !rechargeDTO.getPaymentMethod().equals(TransactionType.WITHDRAW)) {
             recharge.setPaymentMethod(rechargeDTO.getPaymentMethod());
         } else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment method invalid");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(rechargeService.recharge(recharge));
     }

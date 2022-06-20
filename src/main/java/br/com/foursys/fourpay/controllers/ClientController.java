@@ -3,6 +3,7 @@ package br.com.foursys.fourpay.controllers;
 import br.com.foursys.fourpay.dto.RegisterDto;
 import br.com.foursys.fourpay.enums.ClientType;
 import br.com.foursys.fourpay.model.Address;
+import br.com.foursys.fourpay.model.CheckingsAccount;
 import br.com.foursys.fourpay.model.Client;
 import br.com.foursys.fourpay.service.ClientService;
 import org.springframework.beans.BeanUtils;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/id/clients")
+@RequestMapping("/client")
 public class ClientController {
 
     @Autowired
@@ -35,7 +36,7 @@ public class ClientController {
     AddressController addressController;
 
     @PostMapping
-    public Object addClient(@RequestBody RegisterDto registerDto) {
+    public CheckingsAccount addClient(@RequestBody RegisterDto registerDto) {
 
         Client client = new Client();
         Address adress = new Address();

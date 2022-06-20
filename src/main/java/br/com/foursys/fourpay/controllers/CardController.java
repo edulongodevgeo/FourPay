@@ -24,12 +24,12 @@ public class CardController {
     AccountService accountService;
 
     @GetMapping("/{accountId}/credit")
-    public ResponseEntity<Object> getCreditCardById(@PathVariable Integer accountId) {
+    public ResponseEntity<CreditCard> getCreditCardById(@PathVariable Integer accountId) {
         return ResponseEntity.status(HttpStatus.OK).body(cardService.getCreditCardByiD(accountId));
     }
 
     @PostMapping("/{accountId}/credit")
-    public ResponseEntity<Object> postCreateNewCreditCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
+    public ResponseEntity<CreditCard> postCreateNewCreditCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
         CreditCard creditCard = new CreditCard();
         BeanUtils.copyProperties(cardCreationDTO, creditCard);
         creditCard.setAccount(accountService.findById(accountId).get());
@@ -41,7 +41,7 @@ public class CardController {
     }
 
     @PutMapping("/{accountId}/credit")
-    public ResponseEntity<Object> putUpdateCreditCard(@PathVariable Integer accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
+    public ResponseEntity<CreditCard> putUpdateCreditCard(@PathVariable Integer accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
         CreditCard creditCard = (CreditCard) cardService.getCreditCardByiD(accountId);
         if(cardUpdateDTO.getPassword() != null) {
             creditCard.setPassword(cardUpdateDTO.getPassword());
@@ -53,11 +53,11 @@ public class CardController {
     }
 
     @GetMapping("/{accountId}/debit")
-    public ResponseEntity<Object> getDebitCardById(@PathVariable Integer accountId) {
+    public ResponseEntity<DebitCard> getDebitCardById(@PathVariable Integer accountId) {
         return ResponseEntity.status(HttpStatus.OK).body(cardService.getDebitCardByiD(accountId));
     }
     @PostMapping("/{accountId}/debit")
-    public ResponseEntity<Object> postCreateNewDebitCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
+    public ResponseEntity<DebitCard> postCreateNewDebitCard(@PathVariable Integer accountId, @RequestBody CardCreationDTO cardCreationDTO) {
         DebitCard debitCard = new DebitCard();
         BeanUtils.copyProperties(cardCreationDTO, debitCard);
         debitCard.setAccount(accountService.findById(accountId).get());
@@ -69,7 +69,7 @@ public class CardController {
     }
 
     @PutMapping("/{accountId}/debit")
-    public ResponseEntity<Object> putUpdateDebitCard(@PathVariable Integer accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
+    public ResponseEntity<DebitCard> putUpdateDebitCard(@PathVariable Integer accountId, @RequestBody CardUpdateDTO cardUpdateDTO) {
         DebitCard debitCard = (DebitCard) cardService.getDebitCardByiD(accountId);
         if(cardUpdateDTO.getPassword() != null) {
             debitCard.setPassword(cardUpdateDTO.getPassword());
@@ -81,7 +81,7 @@ public class CardController {
     }
 
     @PutMapping("/{accountId}/debit/update-limit")
-    public ResponseEntity<Object> putUpdateDebitCardLimit(@PathVariable Integer accountId, @RequestBody DebitLimitUpdateDTO debitLimitUpdateDTO) {
+    public ResponseEntity<DebitCard> putUpdateDebitCardLimit(@PathVariable Integer accountId, @RequestBody DebitLimitUpdateDTO debitLimitUpdateDTO) {
         DebitCard debitCard = (DebitCard) cardService.getDebitCardByiD(accountId);
         debitCard.setTransactionLimit(debitLimitUpdateDTO.getTransactionLimit());
         return ResponseEntity.status(HttpStatus.OK).body(cardService.saveDebitCard(debitCard));

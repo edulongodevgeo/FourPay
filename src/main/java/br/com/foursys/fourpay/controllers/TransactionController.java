@@ -23,21 +23,21 @@ public class TransactionController {
     @Autowired
     PixService pixService;
     @PostMapping("/deposit")
-    public Object DepositValue(@RequestBody DepositDto depositDto){
+    public Transaction DepositValue(@RequestBody DepositDto depositDto){
         return transactionService.depositValue(depositDto.getAccountId(), depositDto.getDepositValue());
     }
 
     @PostMapping("/withdraw")
-    public Object withdrawValue(@RequestBody WithdrawDto withdrawDto){
+    public Transaction withdrawValue(@RequestBody WithdrawDto withdrawDto){
         return transactionService.withdrawValue(withdrawDto.getAccountId(), withdrawDto.getWithdrawValue());
     }
     @PostMapping("/transfer")
-    public Object transferValue(@RequestBody TransferDTO transferDTO){
+    public Transaction transferValue(@RequestBody TransferDTO transferDTO){
         return transactionService.transferValue(transferDTO.getPayerId(), transferDTO.getReceiverId(), transferDTO.getTransferValue());
     }
 
     @PostMapping("/pix/transfer")
-    public Object transferPix(@RequestBody PixTransferDTO pixTransferDTO){
+    public Transaction transferPix(@RequestBody PixTransferDTO pixTransferDTO){
         Transaction transaction = new Transaction();
         transaction.setDescription("Transferência de pix");
         transaction.setValue(pixTransferDTO.getValue());
