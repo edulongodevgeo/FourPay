@@ -3,12 +3,12 @@ Projeto criado com o intuito de simular um banco real. Com todas as funcionalida
 
 
 ### Projeto feito com uma API Restful, usando as dependencias:
--> Spring-boot
--> Spring web
--> Validator
--> Spring Data
--> MySQL Connector
--> Spring Docs
+- Spring-boot
+- Spring web
+- Validator
+- Spring Data
+- MySQL Connector
+- Spring Docs
 - Feito com a JDK do Java 17
 
 ## Autores
