@@ -10,7 +10,7 @@
     </parent>
     <groupId>br.com.foursys</groupId>
     <artifactId>fourpay</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>FourPayApplication</name>
     <description>Projeto do banco da foursys para a conclusão do fourcamp</description>
     <properties>
